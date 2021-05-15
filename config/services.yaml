@@ -4,7 +4,11 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-
+    mailer_admin: '%env(resolve:MAILER_ADMIN_ADDRESS)%'
+    mailer_from: '%env(resolve:MAILER_FROM_ADDRESS)%'
+    upload_directory: '%kernel.project_dir%/public/uploads/'
+    wilfers_images: '%kernel.project_dir%/public/uploads/wilfersImages'
+    
 services:
     # default configuration for services in *this* file
     _defaults:

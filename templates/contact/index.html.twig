@@ -1,0 +1,29 @@
+{% extends 'layout.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('contact') }}
+{% endblock %}
+
+{% block body %}
+    <section class="background-contact">
+        <div class="background-contact-image"></div>
+    </section>
+
+    <section class="section-contact">
+        <h1 class="my-4 text-center">Prendre <span class="text-primary font-italic">contact</span> avec nous</h1>
+        <div class="form container p-3 mb-5">
+            <p>
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+            <div class="btn-form">
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </div>
+            {{ form_end(form) }}
+            </p>
+        </div>
+
+    </section>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'layoutAdmin.html.twig' %}
+
+{% block title %}Wilfer
+{% endblock %}
+
+{% block body %}
+	<section class="container">
+		<h1 class="my-3">Wilfer -
+			{{ wilfer.firstName ~ ' ' }}
+			<span class="text-primary">{{ wilfer.lastname }}</span>
+		</h1>
+
+		<table class="table table-responsive container-fluid">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ wilfer.id }}</td>
+				</tr>
+				<tr>
+					<th>Prénom</th>
+					<td>{{ wilfer.firstname }}</td>
+				</tr>
+				<tr>
+					<th>Nom</th>
+					<td>{{ wilfer.lastname }}</td>
+				</tr>
+				<tr>
+					<th>Date de naissance</th>
+					<td>{{ wilfer.birthAt ? wilfer.birthAt|date('Y-m-d H:i:s') : '' }}</td>
+				</tr>
+				<tr>
+					<th>Description</th>
+					<td>{{ wilfer.Description }}</td>
+				</tr>
+				<tr>
+					<th>Images associés</th>
+					<td class="row">
+						{% if wilfer.wilferImages | length >= 1 %}
+							{% for image in wilfer.wilferImages %}
+								<img src="{{ asset('uploads/wilfersImages/' ~ image.name ) }}" class="col-3 mb-3" alt="" style="width: 100%; height: auto;">
+							{% endfor %}
+						{% else %}
+							<p class="mb-0">Il n'y pas encore de photo associés à ce wilfer</p>
+						{% endif %}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="my-3">
+			<a href="{{ path('admin_wilfer_edit', {'id': wilfer.id}) }}" class="btn btn-primary mb-3">Modifier son profil</a>
+			<br>
+			<a href="{{ path('admin_wilfer_index') }}" class="btn btn-danger">Retour à la liste des wilfers</a>
+		</div>
+
+	</section>
+{% endblock %}

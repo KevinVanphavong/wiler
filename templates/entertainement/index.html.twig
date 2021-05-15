@@ -1,0 +1,63 @@
+{% extends 'layoutAdmin.html.twig' %}
+
+{% block title %}Entertainement index
+{% endblock %}
+
+{% block body %}
+	<style>
+		.admin-entertainement-description p {
+			margin: 0;
+		}
+	</style>
+	<section class="container my-5">
+		<h1 class="mb-5 text-center">Liste des
+			<strong class="text-primary font-italic">évènements</strong>
+		</h1>
+		<a class="btn btn-primary mb-3 text-light" href="{{ path('admin_entertainement_new') }}">
+			<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+				<path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+			</svg>
+			Ajouter un nouvel évènement
+		</a>
+		<div class="table-responsive">
+			<table class="table table-hover text-center">
+				<thead class="table bg-primary text-light">
+					<tr>
+						<th>Nom</th>
+						<th>Description</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for entertainement in entertainements %}
+						<tr>
+							<td>{{ entertainement.name|raw }}</td>
+							<td class="admin-entertainement-description">{{ entertainement.description|u.truncate(20)|raw }}...</td>
+							<td>
+								<div class="btn-group">
+									<a class="btn btn-sm btn-outline-primary rounded" href="{{ path('admin_entertainement_edit', {'id': entertainement.id}) }}">
+										<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pen text-center" viewbox="0 0 16 16">
+											<path fill-rule="evenodd" d="M13.498.795l.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0
+																																												                                      1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5
+																																												                                      0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1
+																																												                                      1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1
+																																												                                      1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44
+																																												                                      3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+										</svg>
+									</a>
+									<span class="ml-2">{{ include('entertainement/_delete_form.html.twig') }}</span>
+								</div>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<a class="btn btn-danger" href="{{ path("admin_dashboard") }}">
+			Retour à l'accueil d'administration
+		</a>
+	</section>
+
+
+{% endblock %}

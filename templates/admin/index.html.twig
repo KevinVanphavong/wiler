@@ -1,0 +1,23 @@
+{% extends 'layoutAdmin.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block body %}
+    <section class="py-5 container">
+        <h1 class="text-center mb-5">Espace administrateur</h1>
+        <div class="dashboard d-flex flex-wrap flex-column align-items-center">
+            <a href="{{ path('admin_wilfer_index') }}" class="text-center p-2 w-50 my-2 text-decoration-none">
+                Wilfers
+            </a>
+            <a href="{{ path('admin_faq_index') }}" class="text-center p-2 w-50 my-2 text-decoration-none">
+                F.A.Q
+            </a>
+            <a href="{{ path('admin_entertainement_index') }}" class="text-center p-2 w-50 my-2 text-decoration-none">
+                Evènements
+            </a>
+        </div>
+    </section>
+
+{% endblock %}

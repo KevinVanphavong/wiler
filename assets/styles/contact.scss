@@ -1,0 +1,62 @@
+@import "app";
+
+.background-contact-image {
+  background-image: url("../images/wilfer2.jpg");
+  background-size: cover;
+  background-position: 0 20%;
+  height: 25vh;
+  filter: brightness(50%);
+  box-shadow: 0 5px 5px darken($grey, 20%);
+}
+
+.background-contact {
+  position: relative;
+}
+
+.text-on-background {
+  position: absolute;
+  top: 40%;
+}
+
+.form {
+  border-top: 5px inset $primary;
+  border-left: 5px outset $primary;
+  border-bottom: 5px inset $dark;
+  border-right: 5px outset $dark;
+  border-radius: 8px;
+  background-color: darken($light, 5%);
+}
+
+.btn-form {
+  > button {
+    color: $light;
+    border: 2px outset $light;
+    background-color: $primary;
+  }
+
+  > button:hover {
+    color: $primary;
+    border: 2px solid $primary;
+    background-color: $light;
+  }
+}
+
+.login-form {
+  border-top: 5px inset $dark;
+  border-left: 5px outset $dark;
+  border-bottom: 5px inset $primary;
+  border-right: 5px outset $primary;
+  border-radius: 8px;
+  background-color: darken($light, 5%);
+}
+
+.duration,
+.reason {
+  font-family: $text-font;
+}
+
+.wilfers-to-select {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}

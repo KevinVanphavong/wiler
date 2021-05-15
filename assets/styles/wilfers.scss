@@ -1,0 +1,83 @@
+@import 'app';
+
+.background-wilfers-image {
+    background-image: url("../images/wilfer3.jpg");
+    background-size: cover;
+    background-position: top;
+    height: 25vh;
+    filter: brightness(50%);
+    box-shadow: 0 5px 5px darken($grey, 20%);
+}
+
+.background-wilfers {
+    position: relative
+}
+
+.text-on-background {
+    position: absolute;
+    top: 40%;
+}
+
+.btn-search {
+    > button {
+        color: $light;
+        border: 2px solid darken($light, 25%);
+        background-color: darken($primary, 15%);
+    }
+
+    > button:hover {
+        color: $primary;
+        border: 2px outset darken($primary, 15%);
+        background-color: $light;
+    }
+}
+
+.btn-reini {
+    > a {
+        color: $primary;
+        border: 2px outset darken($primary, 15%);
+        background-color: $light;
+    }
+
+    > a:hover {
+        color: $light;
+        border: 2px solid darken($light, 25%);
+        background-color: darken($primary, 15%);
+    }
+}
+
+
+.heart-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.wilfer {
+    position: relative;
+    border-radius: 8px;
+    border: 2px solid lighten($primary, 25%);
+    // background-image: url('../images/fond3.jpg');
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(183,154,53,0.8869922969187675) 49%, rgba(183,154,53,0.6993172268907564) 100%);
+    .div-heart-icon {
+        position: absolute;
+        z-index: 10;
+        top: 5px;
+        right: 5px;
+    }
+}
+
+.wilfer-div-text h2,
+.wilfer-div-text p {
+    color: lighten($primary, 50%);
+    text-shadow: 0.5px 0.5px 0px darken($primary, 20%), -0.5px -0.5px 0px darken($primary, 20%);
+}
+
+.wilfer-picture {
+    width: 170px;
+    height: 200px;
+    object-fit: cover;
+    border: 2px solid lighten($primary, 25%);
+    border-radius: 8px;
+}

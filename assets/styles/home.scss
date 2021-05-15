@@ -1,0 +1,141 @@
+@import "app";
+
+.background-first-image {
+  background-image: url("../images/wilfer1.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 80vh;
+  filter: brightness(55%);
+  box-shadow: 0 5px 5px darken($grey, 20%);
+}
+
+.backgroung-home {
+  position: relative;
+}
+
+.text-on-background {
+  position: absolute;
+  top: 20%;
+}
+
+.btn-on-background {
+  position: absolute;
+  bottom: 30%;
+
+  a {
+    color: $primary;
+    border: 2px outset $primary;
+    background-color: $light;
+  }
+
+  a:hover {
+    color: $light;
+    border: 2px solid $light;
+    background-color: $primary;
+  }
+}
+
+.section2,
+.section4 {
+  background-color: $grey;
+}
+
+.section3 {
+  position: relative;
+  z-index: 10;
+}
+
+.section3 .clipath {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+  clip-path: polygon(0 0, 65% 0, 44% 100%, 0% 100%);
+  background: linear-gradient(
+    135deg,
+    rgba($light, 1) 0%,
+    rgba($primary, 0.9) 60%,
+    rgba($primary, 0.85) 100%
+  );
+}
+
+.section3 h2,
+.section3 p {
+  position: relative;
+  z-index: 12;
+}
+
+.text-entertainement-card {
+  width: 80%;
+  height: auto;
+  border-top: 2px solid $dark;
+  border-left: 2px solid $dark;
+  border-right: 2px solid $primary;
+  border-bottom: 2px solid $primary;
+  border-radius: 8px;
+  box-shadow: 0 5px 5px darken($grey, 20%);
+  background-color: $light;
+}
+
+.text-entertainement-card p {
+  font-size: 14px;
+}
+
+.img-entertainement-card {
+  background-color: black;
+}
+
+@media screen and (max-width: 990px) {
+  .card-process {
+    border-bottom: 2px solid $light;
+  }
+}
+
+.bulle {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-color: $light;
+  box-shadow: 2px 2px 10px 2px darken($grey, 20%);
+  transition: 0.5s all;
+  > img {
+    height: 200px;
+    border-radius: 50%;
+  }
+}
+
+.bulle:hover {
+  -moz-transform: translate(10px, -8px);
+  -webkit-transform: translate(10px, -8px);
+  -o-transform: translate(10px, -8px);
+  -ms-transform: translate(10px, -8px);
+  transform: translate(10px, -8px);
+}
+
+.bulle1 {
+  border-top: 2px solid $dark;
+  border-left: 2px solid $dark;
+  border-right: 2px solid $primary;
+  border-bottom: 2px solid $primary;
+}
+
+.bulle2 {
+  border-top: 2px solid $dark;
+  border-left: 2px solid $primary;
+  border-right: 2px solid $dark;
+  border-bottom: 2px solid $primary;
+}
+
+.bulle3 {
+  border-top: 2px solid $primary;
+  border-left: 2px solid $dark;
+  border-right: 2px solid $primary;
+  border-bottom: 2px solid $dark;
+}
+
+.bulle4 {
+  border-top: 2px solid $primary;
+  border-left: 2px solid $primary;
+  border-right: 2px solid $dark;
+  border-bottom: 2px solid $dark;
+}

@@ -1,0 +1,141 @@
+{% block stylesheets %}
+	{{ encore_entry_link_tags('navfoot') }}
+{% endblock %}
+{# <nav class="navbar navbar-expand-xl navbar navbar-dark bg-dark shadow p-2 d-flex flex-lg-row flex-column">
+	<div class="w-100 text-center text-xl-left">
+		<a class="navbar-brand nav-link mr-0" href="{{ path('home') }}">
+			<h4>
+				<span class="text-primary font-italic">WILFER</span>
+				AGENCY</h4>
+		</a>
+	</div>
+
+	<div class="w-100 text-left">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
+
+	<div class="collapse navbar-collapse w-100 text-left" id="navbarNav">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item pr-3">
+				<a class="nav-link text-light" href="{{ path("wilfers") }}">Catalogue</a>
+			</li>
+			<li class="nav-item pr-3">
+				<a class="nav-link text-light" href="{{ path("contact") }}">Contact</a>
+			</li>
+			<li class="nav-item pr-3">
+				<a class="nav-link text-light" href="{{ path("faq") }}">F.A.Q</a>
+			</li>
+			<li class="nav-item dropdown pr-3">
+				<a class="nav-link dropdown-toggle pt-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					{% if app.user %}
+						<img src="{{ asset('build/images/user.ico') }}" alt="logo user" class="p-1 logo-user-admin bg-primary">
+					{% else %}
+						<img src="{{ asset('build/images/user.ico') }}" alt="logo user" class="p-1 logo-user-admin bg-dark">
+					{% endif %}
+				</a>
+				<div class="dropdown-menu dropdown-menu-right">
+					{% if app.user %}
+						<a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a>
+						{% if is_granted("ROLE_ADMIN") %}
+							<a class="dropdown-item" href="{{ path('admin_dashboard') }}">Espace Admin</a>
+						{% else %}
+							<a class="dropdown-item" href="{{ path('account') }}">Mon compte</a>
+						{% endif %}
+					{% else %}
+						<a class="dropdown-item" href="{{ path('app_login') }}">Se connecter</a>
+						<a class="dropdown-item" href="{{ path('app_register') }}">Créer un compte</a>
+					{% endif %}
+				</div>
+			</li>
+		</ul>
+	</div>
+</nav> #}
+<style>
+	.triangle {
+		transform: rotate(180deg);
+		transition: 0.5s ease;
+	}
+</style>
+
+<header>
+	<div class="container logo-part text-light py-4 px-0">
+		<img id="logo-gentleman" src="{{ asset('build/images/gtl2.png') }}" alt="">
+		<a href="/" class="text-light h1">
+			<span class="text-primary">WILFER
+			</span>AGENCY</a>
+	</div>
+	<aside>
+		<nav class="navigation-part">
+			<p class="close-aside text-light">X</p>
+			<ul class="px-2 py-4 m-0">
+				<li>
+					<a href="{{ path('wilfers') }}">Catalogue</a>
+				</li>
+				<li>
+					<a href="{{ path('contact') }}">Contact</a>
+				</li>
+				<li>
+					<a href="{{ path('faq') }}">F.A.Q</a>
+				</li>
+				<li class="user-dropwdown">
+					<a href="#" class="btn-dropdown">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-fill user-icon" viewbox="0 0 16 16">
+							<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down triangle" viewbox="0 0 16 16">
+							<path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+						</svg>
+					</a>
+					<div class="content-dropdown" style="display: none;">
+						{% if app.user %}
+							<a class="item-dropdown text-dark" href="{{ path('app_logout') }}">Se déconnecter</a>
+							{% if is_granted("ROLE_ADMIN") %}
+								<a class="item-dropdown text-dark" href="{{ path('admin_dashboard') }}">Espace Admin</a>
+							{% else %}
+								<a class="item-dropdown text-dark" href="{{ path('account') }}">Mon compte</a>
+							{% endif %}
+						{% else %}
+							<a class="item-dropdown text-dark" href="{{ path('app_login') }}">Se connecter</a>
+							<a class="item-dropdown text-dark" href="{{ path('app_register') }}">Créer un compte</a>
+						{% endif %}
+					</div>
+				</li>
+			</ul>
+		</nav>
+	</aside>
+</header>
+
+<script>
+	let btnDropdown = document.querySelector(".btn-dropdown");
+let contentDropdown = document.querySelector(".content-dropdown");
+
+btnDropdown.addEventListener("click", function () {
+if (contentDropdown.style.display == "flex") {
+contentDropdown.style.display = "none";
+} else {
+contentDropdown.style.display = "flex";
+}
+});
+
+let closeAside = document.querySelector(".close-aside");
+closeAside.addEventListener("click", function () {
+document.querySelector("aside").style.display = "none";
+});
+
+let gentleman = document.querySelector("#logo-gentleman");
+gentleman.addEventListener("click", function () {
+document.querySelector("aside").style.display = "block";
+});
+
+let triangle = document.querySelector(".triangle");
+let userIcon = document.querySelector(".user-icon");
+
+triangle.addEventListener('click', function () {
+triangle.classList.toggle("triangle");
+})
+userIcon.addEventListener('click', function () {
+triangle.classList.toggle("triangle");
+})
+</script>

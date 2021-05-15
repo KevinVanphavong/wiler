@@ -1,0 +1,19 @@
+{% extends 'layoutAdmin.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}New Wilfer{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block body %}
+    <section class="container pb-5">
+        <h1 class="text-center py-5">Ajouter un nouveau <strong class="text-primary font-italic">wilfer</strong></h1>
+
+        {{ include('adminWilfer/_form.html.twig') }}
+
+        <a href="{{ path('admin_wilfer_index') }}" class="btn btn-danger mt-3">Retour à la liste des wilfers</a>
+    </section>
+
+{% endblock %}

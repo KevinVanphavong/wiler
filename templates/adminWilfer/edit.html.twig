@@ -1,0 +1,53 @@
+{% extends 'layoutAdmin.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block title %}Modifier un Wilfer
+{% endblock %}
+
+{% block body %}
+	<section class="container py-5">
+		<h1 class="text-center pb-3">Modifier le wilfer
+			<strong class="font-italic text-primary">{{ wilfer.firstname }}
+				{{ wilfer.lastname }}</strong>
+		</h1>
+
+		{{ include('adminWilfer/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+	</section>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let deleteButtons = document.querySelectorAll('[data-delete]');
+        deleteButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault(); // en bloquant le lien href de s'éxécuter
+                if (confirm("Voulez vous supprimer cette photo ?")){
+                    // envoyer une requete ajax vers le href du lien de btn
+                    fetch(this.getAttribute('href'), { // this fait référence au lien sur lequel on a cliqué
+                        method: "DELETE", // préciser la méthode car la fonction dans le controller n'accepte que des méthodes DELETE
+                        headers: {
+                            'X-Requested-With': "XMLHttpRequest", // préciser qu'on va utiliser du XMLHttp.. sans instancier un objet, pour l'AJAX
+                            'Content-Type': "application/json" // préciser le type de contenu envoyé qui sera du JSON : best way pour l'AJAX
+                        },
+                        body: JSON.stringify({"_token": this.dataset.token}) // créer un tableau lors de l'envoi de données JSON, qui aura une clé "_token" avec le token qui sera la valeur, pour le récupérer dans le controller
+                    })
+                        .then(
+                            response => response.json() // récupérer la réponse en JSON
+                        )
+                        .then(data => {
+                            if(data.success)
+                                this.remove(),
+                                    alert('Votre image a bien été supprimé !')
+                            else
+                                alert(data.error)
+                        })
+                }
+            })
+        })
+    </script>
+{% endblock %}

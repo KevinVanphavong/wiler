@@ -1,0 +1,13 @@
+{% extends 'layoutAdmin.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    <section class="container pb-5">
+        <h1 class="my-5 text-center">Ajouter un nouvel <strong class="text-primary font-italic">évènement</strong></h1>
+
+        {{ include('entertainement/_form.html.twig') }}
+
+        <a href="{{ path('admin_entertainement_index') }}" class="btn btn-danger">Retour</a>
+    </section>
+{% endblock %}

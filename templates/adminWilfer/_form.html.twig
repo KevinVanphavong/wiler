@@ -1,0 +1,27 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+<section class="container">
+
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+
+	<h2 class="h4">Images associés</h2>
+	<div class="row">
+		{% if app.request.attributes.get('_route') == "admin_wilfer_edit" %}
+			{% for image in wilfer.wilferImages %}
+				<a
+					href="{{ path('admin_wilfer_image_delete', {id: image.id}) }}" class="col-3 mb-3" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">
+					{# <a href="" class="col-3 mb-3" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}"> #}
+					<img src="{{ asset('uploads/wilfersImages/' ~ image.name ) }}" alt="" style="width: 100%; height: auto;">
+				</a>
+			{% endfor %}
+		{% else %}
+			<p class="pl-3 font-italic font-weight-bold">(Il n'y pas encore de photo associés à ce wilfer)</p>
+		{% endif %}
+	</div>
+
+	<button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+	{{ form_end(form) }}
+	<a href="{{ path('admin_wilfer_index') }}" class="btn btn-danger mt-3">Retour à la liste des wilfers</a>
+
+</section>

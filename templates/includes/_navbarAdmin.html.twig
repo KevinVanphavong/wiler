@@ -1,0 +1,52 @@
+{% block stylesheets %}
+	{{ encore_entry_link_tags('navfoot') }}
+{% endblock %}
+<nav class="navbar navbar-expand-xl navbar navbar-dark bg-dark shadow p-2 d-flex flex-lg-row flex-column">
+	<div class="w-100 text-center text-xl-left">
+		<a class="navbar-brand nav-link mr-0" href="{{ path('home') }}">
+			<h4>
+				<span class="text-primary font-italic">WILFER</span>
+				AGENCY</h4>
+		</a>
+	</div>
+
+	<div class="w-100 text-left">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
+
+	<div class="collapse navbar-collapse w-100 text-left" id="navbarNav">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item pr-3">
+				<a class="nav-link text-light" href="{{ path("admin_wilfer_index") }}">Wilfers</a>
+			</li>
+			<li class="nav-item pr-3">
+				<a class="nav-link text-light" href="{{ path("admin_entertainement_index") }}">Evènements</a>
+			</li>
+			<li class="nav-item pr-3">
+				<a class="nav-link text-light" href="{{ path("admin_faq_index") }}">F.A.Q</a>
+			</li>
+			<li class="nav-item dropdown pr-3">
+				<a class="nav-link dropdown-toggle pt-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-fill" viewbox="0 0 16 16">
+						<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+					</svg>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right">
+					{% if app.user %}
+						<a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a>
+						{% if is_granted("ROLE_ADMIN") %}
+							<a class="dropdown-item" href="{{ path('admin_dashboard') }}">Espace Admin</a>
+						{% else %}
+							<a class="dropdown-item" href="{{ path('user') }}">Mon compte</a>
+						{% endif %}
+					{% else %}
+						<a class="dropdown-item" href="{{ path('app_login') }}">Se connecter</a>
+						<a class="dropdown-item" href="{{ path('app_register') }}">Créer un compte</a>
+					{% endif %}
+				</div>
+			</li>
+		</ul>
+	</div>
+</nav>

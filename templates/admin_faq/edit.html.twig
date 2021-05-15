@@ -1,0 +1,24 @@
+{% extends 'layoutAdmin.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block title %}Modifier une question/réponse | {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('faq') }}
+{% endblock %}
+
+{% block body %}
+    <section class="container my-5">
+        <h1 class="mb-5 text-center">Modifier la question
+            <strong class="text-primary font-italic">
+                {{ faq.subject }}
+            </strong>
+        </h1>
+            <div class="admin-edit-faq">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button class="btn btn-primary">Mettre à jour</button>
+                {{ form_end(form) }}
+            </div>
+        <a class="btn btn-danger mt-3" href="{{ path('admin_faq_index') }}">Retour à la liste des F.A.Q</a>
+    </section>
+{% endblock %}

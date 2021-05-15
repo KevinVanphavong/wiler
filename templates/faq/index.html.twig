@@ -1,0 +1,31 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Besoin d'aide ? | {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('faq') }}
+{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="background-faq-image"></div>
+        <h1 class="text-center my-5 faq-section">Nous répondons à vos <span
+                    class="font-italic text-primary">questions</span> ici</h1>
+
+        <div class="container mb-3">
+            {% for faq in faqs %}
+                <div class="my-3">
+                    <h3 class="mb-3 text-primary bg-transparent border-0">{{ faq.subject }}</h3>
+                    <p class="m-0 bg-transparent border-0">{{ faq.feedback|raw }}</p>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+
+        <p class="text-center my-5">
+            Des doutes ou des questions ? Décidemment ...
+            <br>
+            Venez nous écrire directement <a href="{{ path('contact') }}">dans cette rubrique</a>
+        </p>
+    </section>
+{% endblock %}

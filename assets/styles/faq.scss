@@ -1,0 +1,18 @@
+@import "app.scss";
+
+.background-faq-image {
+  background-image: url("../images/wilfer8.jpg");
+  background-size: cover;
+  background-position: 0 40%;
+  height: 25vh;
+  filter: brightness(50%);
+  box-shadow: 0 5px 5px darken($grey, 20%);
+}
+
+table {
+  border: 2px solid $primary;
+}
+
+.admin-faq-feedback p {
+  margin-bottom: 0px;
+}

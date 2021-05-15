@@ -1,0 +1,22 @@
+{% extends 'layoutAdmin.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block title %}Ajouter une nouvelle question/réponse | {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('faq') }}
+{% endblock %}
+
+{% block body %}
+    <section class="container my-5">
+        <h1 class="mb-5 text-center">Ajouter une <span class="font-italic"><strong
+                        class="text-primary">question</strong>|réponse</span></h1>
+        <div class="text-dark">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="btn btn-primary">Ajouter</button>
+            <br>
+            <a class="btn btn-danger mt-3" href="{{ path('admin_faq_index') }}">Retour</a>
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}

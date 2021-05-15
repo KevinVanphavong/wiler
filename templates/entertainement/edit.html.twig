@@ -1,0 +1,22 @@
+{% extends 'layoutAdmin.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+
+{% block title %}Edit Entertainement{% endblock %}
+
+{% block body %}
+    <section class="container pb-5">
+        <h1 class="text-center py-5">Modifier l'évènement
+            <strong class="text-primary font-italic">
+                {{ entertainement.name }}
+            </strong>
+        </h1>
+
+        {{ include('entertainement/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+        <a href="{{ path('admin_entertainement_index') }}" class="btn btn-danger mb-3">Retour à la liste des
+            évènements</a>
+
+    </section>
+
+{% endblock %}

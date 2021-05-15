@@ -1,0 +1,69 @@
+{% extends 'layout.html.twig' %}
+{% form_theme searchWilfer 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Notre catalogue de gentlemen wilfers
+{% endblock %}
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('wilfers') }}
+{% endblock %}
+
+{% block body %}
+	<section class="background-wilfers">
+		<div class="background-wilfers-image"></div>
+	</section>
+
+	<section class="wilfers container pb-5">
+		<h1 class="text-center my-4">Notre catalogue de
+			<span class="text-primary font-italic ">
+				wilfers
+			</span>
+			gentlemen</h1>
+
+		<div class="search-div mb-2">
+			{{ form_start(searchWilfer) }}
+			{{ form_widget(searchWilfer) }}
+			<div class="d-inline-flex">
+				<div class="btn-search mr-2">
+					<button class="btn btn-primary">Rechercher</button>
+				</div>
+				<div class="btn-reini d-flex align-items-center">
+					<a class="btn" href="{{ path('wilfers') }}">Réinitialiser</a>
+				</div>
+			</div>
+			{{ form_end(searchWilfer) }}
+		</div>
+
+		<div class="d-flex flex-wrap justify-content-lg-around justify-content-center">
+			{% for wilfer in wilfers %}
+				<div class="wilfer p-0 my-3 col-lg-5 col-10 d-flex flex-sm-row flex-column">
+					<div class="div-heart-icon">
+						{% if app.user %}
+							<a href="{{ path("wilfer_favorites", {id: wilfer.id}) }}">
+								{% if app.user.isInFavoritesWilfer(wilfer) == true %}
+									<img src="{{ asset('build/images/full-heart.jpg') }}" class="heart-icon">
+								{% else %}
+									<img src="{{ asset('build/images/empty-heart.jpg') }}" class="heart-icon">
+								{% endif %}
+							</a>
+						{% endif %}
+					</div>
+					<div class="d-flex justify-content-center align-items-center m-2 wilfer-div-picture">
+						Photo de l'artiste
+					</div>
+					<div class="d-flex flex-column justify-content-around p-lg-2 p-4 wilfer-div-text">
+						<h2 class="mb-2 h4">{{ wilfer.firstname }}
+							{{ wilfer.lastname }}</h2>
+						<p class="mb-2">Né le
+							{{ wilfer.birthAt|date("m/d/Y") }}
+						</p>
+						<p class="mb-2">"
+							{{ wilfer.description }}
+							"</p>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+
+	</section>
+{% endblock %}

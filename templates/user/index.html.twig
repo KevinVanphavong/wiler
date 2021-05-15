@@ -1,0 +1,58 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('account') }}
+{% endblock %}
+
+{% block body %}
+	<div class="background-account-image"></div>
+	<section class="container pb-5 px-0">
+		<h1 class="text-center py-5">Bienvenue sur
+			<span class="text-primary">votre espace</span>
+			personnel</h1>
+
+		<h2 class="text-lg-left text-center">Vos
+			<strong class="text-primary font-italic mb-4">Wilfers</strong>
+			préférés :</h2>
+		<div class="d-flex flex-wrap justify-content-lg-between justify-content-center">
+			{% for favoritesWilfer in app.user.favoritesWilfers %}
+				<div class="wilfer-card  p-0 my-3 col-lg-5 col-10 d-flex">
+					<div class="div-heart-icon">
+						{% if app.user %}
+							<a href="{{ path("wilfer_favorites", {id: favoritesWilfer.id}) }}">
+								{% if app.user.isInFavoritesWilfer(favoritesWilfer) == true %}
+									<img src="{{ asset('build/images/full-heart.jpg') }}" class="heart-icon">
+								{% else %}
+									<img src="{{ asset('build/images/empty-heart.jpg') }}" class="heart-icon">
+								{% endif %}
+							</a>
+						{% endif %}
+					</div>
+					<div class="d-flex justify-content-center align-items-center m-2">
+						<img src="{{ asset('uploads/' ~ favoritesWilfer.picture) }}" alt="" class="rounded wilfer-picture">
+					</div>
+					<div class="d-flex flex-column justify-content-around p-2">
+						<p class="mb-2 text-dark h3">{{ favoritesWilfer.firstname }}
+							<span class="text-light">{{ favoritesWilfer.lastname }}</span>
+						</p>
+						<p class="mb-2 text-dark">Née le :
+							<span class="text-light">{{ favoritesWilfer.birthAt|date("m/d/Y") }}</span>
+						</p>
+						<p class="text-dark">Citation préférée :
+							<br>
+							"<span class="font-italic font-weight-bold text-light">{{ favoritesWilfer.Description }}</span>"
+						</p>
+
+					</div>
+				</div>
+			{% else %}
+				<p class="mt-3 mb-0">
+					Vous n'en avez pas sélectionnés pour le moment.
+					<br>
+					Venez faire un tour sur notre
+					<a href="{{ path('wilfers') }}">catalogue</a>, on sait jamais sur qui on tombe
+				</p>
+			{% endfor %}
+		</div>
+	</section>
+{% endblock %}

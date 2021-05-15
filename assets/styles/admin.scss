@@ -1,0 +1,27 @@
+@import 'app';
+
+.logo-user {
+  height: 40px;
+  width: 40px;
+  background-color: transparent;
+  border: 2px solid $light;
+  border-radius: 50%;
+}
+
+.dashboard {
+  > a {
+    border: 2px solid $primary;
+    border-radius: 8px;
+    background-color: $light;
+  }
+
+  > a:hover {
+    border: 2px solid darken($light, 15%);
+    background-color: $primary;
+    color: $light;
+  }
+}
+
+input {
+  color: $dark;
+}
