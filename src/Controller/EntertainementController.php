@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Entertainement;
+use App\Entity\EntertainementImage;
 use App\Form\EntertainementType;
 use App\Repository\EntertainementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,6 +41,17 @@ class EntertainementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $images = $form->get('entertainementImages')->getData();
+
+            foreach ($images as $image) {
+                $imageName = md5(uniqid()) . '.' . $image->guessExtension();
+                $image->move($this->getParameter('entertainements_images'), $imageName);
+                $newImage = new EntertainementImage();
+                $newImage->setName($imageName);
+                $entertainement->addEntertainementImage($newImage);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($entertainement);
             $entityManager->flush();
@@ -76,6 +89,15 @@ class EntertainementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $images = $form->get('entertainementImages')->getData();
+
+            foreach ($images as $image) {
+                $imageName = md5(uniqid()) . '.' . $image->guessExtension();
+                $image->move($this->getParameter('entertainements_images'), $imageName);
+                $newImage = new EntertainementImage();
+                $newImage->setName($imageName);
+                $entertainement->addEntertainementImage($newImage);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('admin_entertainement_index');
@@ -99,5 +121,28 @@ class EntertainementController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_entertainement_index');
+    }
+
+    /**
+     * @Route("entertainement/delete/entertainementImage/{id}", name="entertainement_image_delete", methods={"DELETE"})
+     */
+    public function deleteWilferImage(entertainementImage $entertainementImage, Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        // vérifier si le token envoyé correspond bien a celui de l'image en question
+        if ($this->isCsrfTokenValid('delete' . $entertainementImage->getId(), $data['_token'])) {
+            // récupérer le nom de l'image  le supprimer du disque et de la bdd
+            $imageName = $entertainementImage->getName();
+            unlink($this->getParameter('entertainements_images') . '/' . $imageName);
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($entertainementImage);
+            $em->flush();
+
+            // donner une réponse en JSON
+            return new JsonResponse(['success' => 1]);
+        } else {
+            return new JsonResponse(['error' => 'Token invalide'], 400);
+        }
     }
 }

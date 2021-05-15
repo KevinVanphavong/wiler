@@ -8,6 +8,7 @@ parameters:
     mailer_from: '%env(resolve:MAILER_FROM_ADDRESS)%'
     upload_directory: '%kernel.project_dir%/public/uploads/'
     wilfers_images: '%kernel.project_dir%/public/uploads/wilfersImages'
+    entertainements_images: '%kernel.project_dir%/public/uploads/entertainementsImages'
     
 services:
     # default configuration for services in *this* file

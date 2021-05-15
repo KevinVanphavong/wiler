@@ -1,6 +1,19 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary mb-3">{{ button_label|default('Ajouter') }}</button>
+{{ form_widget(form) }}
+<h2 class="h4">Images associés</h2>
+<div class="row">
+	{% if app.request.attributes.get('_route') == "admin_entertainement_edit" and (entertainement.entertainementImages | length >= 1) %}
+		{% for image in entertainement.entertainementImages %}
+			<a href="{{ path('admin_entertainement_image_delete', {id: image.id}) }}" class="col-3 mb-3" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">
+				<img src="{{ asset('uploads/entertainementsImages/' ~ image.name ) }}" alt="" style="width: 100%; height: auto;">
+			</a>
+		{% endfor %}
+	{% else %}
+		<p class="pl-3 font-italic font-weight-bold">(Il n'y pas encore de photo associés à cet évènement)</p>
+	{% endif %}
+</div>
+
+<button class="btn btn-primary mb-3">{{ button_label|default('Ajouter') }}</button>
 {{ form_end(form) }}
