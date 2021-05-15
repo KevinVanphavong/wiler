@@ -34,7 +34,7 @@
 			</h2>
 			<p class="text-center m-0">
 				Autrement dit, un ange envoyé et formé par l’école de la vie, la Wild Code School, pour rendre la vie
-												des femmes aussi belle qu’elles le sont
+				des femmes aussi belle qu’elles le sont
 			</p>
 		</div>
 	</section>
@@ -42,10 +42,10 @@
 	<section class="section3">
 		<div class="clipath"></div>
 		<div class="container">
-			<h2 class="text-center py-3 m-0">
+			<h2 class="text-center pt-5 pb-3 m-0">
 				Nos services et évènements déjà proposés
 			</h2>
-			<p class="pb-3 m-0">
+			<p class="pb-5 m-0">
 				Ce que nous proposons est unique, une expérience de vie incroyable, car nos wilfers sont grandement
 				qualifiés pour les
 				situations situées ci-dessous. La bienveillance de notre équipe sera la pour vous faire vivre un agréable
@@ -58,10 +58,13 @@
 	<section class="container py-5 px-0">
 		<div class="d-flex justify-content-xl-between justify-content-lg-around flex-wrap justify-content-center">
 			{% for entertainement in entertainements %}
-				<div class="img-entertainement-card col-lg-5 col-10 p-3">
-					<div class="text-entertainement-card py-2 px-3">
-						<h2 class="text-center mb-3 h4">{{ entertainement.name|raw }}</h3>
-						<p>{{ entertainement.description|raw }}</p>
+				<div class="box-card d-flex justify-content-center my-3 col-lg-5 col-11 m-3 px-0">
+					{% for image in entertainement.entertainementImages %}
+						<img style="width:100%; height:auto" class="img-card" src="{{ asset('uploads/entertainementsImages/' ~ image.name ) }}" alt="">
+					{% endfor %}
+					<div class="text-card px-3 py-3">
+						<h2 class="h4">{{ entertainement.name }}</h2>
+						{{ entertainement.description | raw }}
 					</div>
 				</div>
 			{% endfor %}
