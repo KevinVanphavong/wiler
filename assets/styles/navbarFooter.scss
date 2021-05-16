@@ -113,6 +113,14 @@ aside {
 
 @media screen and (max-width: 950px) {
   aside {
-    width: 35%;
+    width: 40%;
   }
+  aside .navigation-part ul li a {
+    font-size: 20px;
+  }
+}
+
+.triangle {
+  transform: rotate(180deg);
+  transition: 0.5s ease;
 }

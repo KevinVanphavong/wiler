@@ -9,9 +9,19 @@
     </head>
     <body>
         <h1>Une personne vous a contacté par le biais du formulaire de contact :</h1>
-        <h2>{{ contact.firstname }} {{ contact.lastname }}</h2>
-        <p>Sur le thème : {{ contact.reason }}</p>
+        <h2>{{ contact.firstname }} <span class="text-primary">{{ contact.lastname }}</span></h2>
+        <p>Sur le thème : {{ reason }}</p>
+        <p>Wilfers :
+        {% set union = "" %}
+        {% for wilfer in wilfers %}
+            {{ union ~ ' ' ~ wilfer.fullname }}
+            {% if union == "" %}
+                {% set union = "-" %}
+            {% endif %}
+        {% endfor %}
+        </p>
+        <p>Evènement choisi : {{ event.name }}</p>
+        <p>Temps de la prestation voulu : {{ duration }}</p>
         <p>Message : {{ contact.otherReason }}</p>
     </body>
 </html>
-

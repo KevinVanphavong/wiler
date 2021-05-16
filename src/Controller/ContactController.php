@@ -27,13 +27,26 @@ class ContactController extends AbstractController
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
+        
+        // dump(
+            //     gettype($form->get('duration')->getData()),
+            //     $form->get('duration')->getData(),
+            //     gettype($form->get('events')->getData()),
+            //     $form->get('events')->getData(),
+            // );die();
+            
         if ($form->isSubmitted() && $form->isValid()) {
+            $reason = $form->get('events')->getData()->getName();
             $email = (new Email())
                 ->from($contact->getEmail())
                 ->to($this->getParameter('mailer_admin'))
-                ->subject($contact->getReason())
+                ->subject($reason)
                 ->html($this->renderView('contact/mail.html.twig', [
                     'contact' => $contact,
+                    'reason' => $reason,
+                    'wilfers' => $form->get('wilfers')->getData(),
+                    'event' => $form->get('events')->getData(),
+                    'duration' => $form->get('duration')->getData(),
                 ]));
             $mailer->send($email);
             $this->addFlash('success', 'Votre message a bien été envoyé !');

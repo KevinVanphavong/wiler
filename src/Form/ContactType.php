@@ -36,6 +36,7 @@ class ContactType extends AbstractType implements FormTypeInterface
                     "3 heures" => "3 heures",
                     "6 heures" => "6 heures",
                     "9 heures" => "9 heures",
+                    "Autres (précisez votre durée souhaité dans l'encadré ci-dessous)" => "Autres",
                 ],
                 'attr' => ['class' => 'text-primary duration'],
                 'mapped'    => false,
@@ -55,16 +56,27 @@ class ContactType extends AbstractType implements FormTypeInterface
             ->add('email', EmailType::class, [
                 'attr' => ['placeholder' => 'Johndoe@gmail.com']
             ])
-            ->add('reason', ChoiceType::class, [
-                'choices' => [
-                    'Fête en famille' => 'Fête en famille',
-                    'Evènements professionnel' => 'Evènements professionnel',
-                    'Peine d\'amour' => 'Peine d\'amour',
-                    'Evènements personnels' => 'Evènements personnels'
-                ],
+            ->add('events', EntityType::class, [
+                'class' => Entertainement::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'expanded' => false,
+                'by_reference' => false,
+                'mapped'    => false,
+                'label' => 'Type d\'évènement',
                 'attr' => ['class' => 'text-primary reason'],
-                'label' => 'Types d\'évènements'
+
             ])
+            // ->add('reason', ChoiceType::class, [
+            //     'choices' => [
+            //         'Fête en famille' => 'Fête en famille',
+            //         'Evènements professionnel' => 'Evènements professionnel',
+            //         'Peine d\'amour' => 'Peine d\'amour',
+            //         'Evènements personnels' => 'Evènements personnels'
+            //     ],
+            //     'attr' => ['class' => 'text-primary reason'],
+            //     'label' => 'Types d\'évènements'
+            // ])
             ->add('otherReason', TextareaType::class, [
                 'attr' => ['placeholder' => 'Ecrivez votre raison ici'],
                 'label' => 'Expliquez nous vos envies'
