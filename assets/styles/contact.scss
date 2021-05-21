@@ -39,6 +39,18 @@
     border: 2px solid $primary;
     background-color: $light;
   }
+
+  a {
+    color: $primary;
+    border: 2px solid $primary;
+    background-color: $light;
+  }
+
+  a:hover {
+    color: $light;
+    border: 2px outset $light;
+    background-color: $primary;
+  }
 }
 
 .login-form {

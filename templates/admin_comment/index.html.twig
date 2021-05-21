@@ -35,7 +35,9 @@
 							<td>{{ comment.content | slice(0,5) ~ '...' }}</td>
 							<td>{{ comment.author.firstname ~ ' ' ~ comment.author.lastname }}</td>
 							<td>{{ comment.note ~ '/5' }}</td>
-							<td>{{ comment.isApprouved }}</td>
+							<td>
+								{{ comment.isApprouved ? "✅" : "❌" }}
+							</td>
 							<td>
 								<div class="btn-group">
 									<a href="{{ path('admin_comment_edit', {'commentId': comment.id, "wilferId" : comment.wilfer.id}) }}" class="btn btn-sm btn-outline-primary rounded">
@@ -49,7 +51,7 @@
 										</svg>
 									</a>
 
-									<span class="ml-2">{{ include('comment/_delete_form.html.twig') }}</span>
+									<span class="ml-2">{{ include('admin_comment/_delete_form.html.twig') }}</span>
 								</div>
 							</td>
 						</tr>

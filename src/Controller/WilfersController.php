@@ -59,13 +59,18 @@ class WilfersController extends AbstractController
             $comment->setWilfer($wilfer);
             $comment->setAuthor($this->getUser());
             $comment->setDate(new DateTime());
+            $comment->setIsApprouved(false);
             $entityManager->persist($comment);
             $entityManager->flush();
             return $this->redirectToRoute('wilfer_id_show', ['id' => $wilfer->getId()]);
         }
 
+        $em = $this->getDoctrine()->getManager(); 
+        $comments = $em->getRepository(Comment::class)->findBy(['wilfer' => $wilfer, 'isApprouved' => true]);
+
         return $this->render('wilfers/show.html.twig', [
             'wilfer' => $wilfer,
+            'comments' => $comments,
             'formComment' => $form->createView()
         ]);
     }

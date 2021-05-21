@@ -32,6 +32,7 @@
 		}
 		.one-comment {
 			width: 50%;
+			height: auto;
 			border-top: 3px outset whitesmoke;
 			border-left: 3px outset whitesmoke;
 			border-radius: 10px;
@@ -49,6 +50,10 @@
 			animation: fade 10s; 
 		}
 
+		#comment div.form-group:nth-child(3){
+			display: none;
+		}
+		
 		@keyframes fade {
 			0% {
 				opacity: 0;
@@ -75,7 +80,7 @@
 			</h1>
 			<div class="d-flex">
 				<h2 class=" h1 text-primary font-weight-bold font-italic">{{ ' _' ~ wilfer.firstname }}
-					<span class="text-dark font-weight-normal">{{ ' ' ~wilfer.lastname | upper }}</span>
+					<span class="text-dark font-weight-normal">{{ ' ' ~ wilfer.lastname | upper }}</span>
 					<span>
 						{% if app.user %}
 							<a id="favoritesWilfers" href="{{ path("wilfer_favorites", {id: wilfer.id}) }}" class="align-top">
@@ -129,14 +134,14 @@
 		<hr>
 		<section class="comments">
 			<h2>
-				Les avis de nos membres ({{ wilfer.comments | length }})
+				Les avis de nos membres ({{ comments | length }})
 			</h2>
-			{% if wilfer.comments | length > 0 %}
+			{% if comments | length > 0 %}
 				{% set moyenne = 0 %}
-				{% for comment in wilfer.comments %}
+				{% for comment in comments %}
 					{% set moyenne = moyenne + comment.note %}
 				{% endfor %}
-				{% set moyenne = moyenne / (wilfer.comments | length) %}
+				{% set moyenne = moyenne / (comments | length) %}
 				<p class="mb-0">Note moyenne : 
 				{% for i in 1.. moyenne | round %}
 					⭐
@@ -144,9 +149,8 @@
 				</p> 
 			{% endif %}
 			<div class="all-comments d-flex justify-content-center">
-				{% if wilfer.comments | length > 0 %}
-					{% for comment in wilfer.comments %}
-						{# <div class="one-comment col-lg-3 col-md-5 col-10 m-2 d-flex flex-column justify-content-around"> #}
+				{% if comments | length > 0 %}
+					{% for comment in comments %}
 						<div class="one-comment d-none my-3">
 							<div class="d-flex justify-content-between">
 								<p class="mb-0">{{ comment.author.firstname ~ ' ' ~ comment.author.lastname }}</p>
@@ -156,9 +160,11 @@
 									{% endif %}
 								{% endif %}
 							</div>
-							{% for i in 1..(comment.note) %}
-								⭐
-							{% endfor %}
+							<p class="mb-0">
+								{% for i in 1..(comment.note) %}
+									{{ '⭐' |trim }}
+								{% endfor %}
+							</p>
 							<p class="font-italic font-weight-bold mb-0">"
 								{{ comment.content }}
 								"</p>
@@ -181,12 +187,16 @@
 				</div>
 
 				<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+				{% if app.user %}
 					<div class="card-body">
 						{{ form_start(formComment) }}
 						{{ form_widget(formComment) }}
 						<button class="btn btn-primary">{{ 'Envoyer'|trans }}</button>
 						{{ form_end(formComment) }}
 					</div>
+				{% else %}
+					<p class="mb-0">Vous devez être connecté pour écrire un commentaire</p>
+				{% endif %}
 				</div>
 			</div>
 		</div>
