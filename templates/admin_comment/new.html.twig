@@ -1,0 +1,13 @@
+{% extends 'layoutAdmin.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    <section class="container pb-5">
+        <h1 class="my-5 text-center">Ajouter un nouveau <strong class="text-primary font-italic">commentaire</strong></h1>
+
+        {{ include('admin_comment/_form.html.twig') }}
+
+        <a href="{{ path('admin_comment_index') }}" class="btn btn-danger mt-3">Retour à la liste des commentaires</a>
+    </section>
+{% endblock %}

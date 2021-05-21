@@ -13,7 +13,8 @@ class SearchWilferType extends AbstractType
     {
         $builder
             ->add('search', SearchType::class, [
-                'label' => 'Mots-clés'
+                'label' => 'Mots-clés',
+                'attr' => ['class' => 'input']
             ])
         ;
     }

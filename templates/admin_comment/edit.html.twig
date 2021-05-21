@@ -1,0 +1,21 @@
+{% extends 'layoutAdmin.html.twig' %}
+
+{% block title %}Modifier le commentaire {{ comment.id }}{% endblock %}
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+
+{% block body %}
+	<section class="container py-5">
+		<h1 class="text-center pb-5">Modifier le commentaire <strong class="font-italic text-primary">{{ comment.id }}</h1>
+        {{ include('comment/_form.html.twig', {'button_label': 'Mettre à jour', 'class': 'btn btn-warning'}) }}
+
+        <a href="{{ path('admin_comment_index') }}" class="btn btn-danger mt-3">Retour à la liste des commentaires</a>
+
+        <div class="mt-3">
+            {{ include('comment/_delete_form.html.twig') }}
+        </div>
+    </section>
+{% endblock %}

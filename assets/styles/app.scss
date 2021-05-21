@@ -21,9 +21,12 @@ h6 {
 
 p,
 a,
+a.btn,
 button,
+button.btn,
 label,
 input,
+.input,
 ul,
 li,
 th,
@@ -31,5 +34,5 @@ td,
 textarea,
 legend {
     font-family: $text-font;
-    font-size: 18px;
+    font-size: $font-size;
 }

@@ -14,7 +14,7 @@
 	</section>
 
 	<section class="wilfers container pb-5">
-		<h1 class="text-center my-4">Notre catalogue de
+		<h1 class="text-center my-4 h2">Notre catalogue de
 			<span class="text-primary font-italic ">
 				wilfers
 			</span>
@@ -39,7 +39,7 @@
 				<div class="wilfer p-0 my-3 col-lg-5 col-10 d-flex flex-sm-row flex-column">
 					<div class="div-heart-icon">
 						{% if app.user %}
-							<a href="{{ path("wilfer_favorites", {id: wilfer.id}) }}">
+							<a href="{{ path("wilfer_favorites", {id: wilfer.id}) }}" id="favoritesWilfers">
 								{% if app.user.isInFavoritesWilfer(wilfer) == true %}
 									<img src="{{ asset('build/images/full-heart.jpg') }}" class="heart-icon">
 								{% else %}
@@ -48,22 +48,53 @@
 							</a>
 						{% endif %}
 					</div>
-					<div class="d-flex justify-content-center align-items-center m-2 wilfer-div-picture">
-						Photo de l'artiste
-					</div>
+					{% if wilfer.wilferImages | length > 0 %}
+						<div class="d-flex justify-content-center align-items-center m-2 wilfer-div-picture">
+							<img src="{{ asset('uploads/wilfersImages/' ~ wilfer.wilferImages[0].name) }}" alt="" class="rounded wilfer-picture">
+						</div>
+					{% else %}
+						<div class="d-flex justify-content-center align-items-center m-2 wilfer-div-picture">
+							<img src="" alt="Selfie of the wilfer {{ wilfer.firstname ~ ' ' ~ wilfer.lastname }}">
+						</div>
+					{% endif %}
 					<div class="d-flex flex-column justify-content-around p-lg-2 p-4 wilfer-div-text">
 						<h2 class="mb-2 h4">{{ wilfer.firstname }}
-							{{ wilfer.lastname }}</h2>
+							<span class="text-light">{{ wilfer.lastname }}</span>
+						</h2>
 						<p class="mb-2">Né le
-							{{ wilfer.birthAt|date("m/d/Y") }}
+							<span class="text-light">{{ wilfer.birthAt|date("m/d/Y") }}</span>
 						</p>
 						<p class="mb-2">"
-							{{ wilfer.description }}
+							<i class="text-light">{{ wilfer.description }}</i>
 							"</p>
+						<a class="btn" href="{{ path('wilfer_id_show', {'id': wilfer.id}) }}" style="width:auto;">En savoir plus</a>
 					</div>
 				</div>
 			{% endfor %}
 		</div>
-
 	</section>
+{% endblock %}
+
+
+{% block javascripts %}
+{{ parent() }}
+
+<script>
+	let btnToFavorites = document.querySelectorAll("#favoritesWilfers")
+	
+	btnToFavorites.forEach(element => {
+		element.addEventListener('click', addToFavoritesWilfers);
+	});
+	
+	function addToFavoritesWilfers(event) {
+		event.preventDefault();
+		fetch(this.getAttribute('href'))
+
+		if (event.currentTarget.firstElementChild.getAttribute('src') == "{{ asset('build/images/full-heart.jpg') }}") {
+			event.currentTarget.firstElementChild.setAttribute('src', "{{ asset('build/images/empty-heart.jpg') }}")
+		} else {
+			event.currentTarget.firstElementChild.setAttribute('src', "{{ asset('build/images/full-heart.jpg') }}")
+		}
+	}
+</script>
 {% endblock %}

@@ -24,7 +24,7 @@ class AdminWilferController extends AbstractController
      */
     public function index(WilferRepository $wilferRepository): Response
     {
-        return $this->render('adminWilfer/index.html.twig', [
+        return $this->render('admin_wilfer/index.html.twig', [
             'wilfers' => $wilferRepository->findAll(),
         ]);
     }
@@ -58,7 +58,7 @@ class AdminWilferController extends AbstractController
             return $this->redirectToRoute('admin_wilfer_index');
         }
 
-        return $this->render('adminWilfer/new.html.twig', [
+        return $this->render('admin_wilfer/new.html.twig', [
             'wilfer' => $wilfer,
             'form' => $form->createView(),
         ]);
@@ -71,7 +71,7 @@ class AdminWilferController extends AbstractController
      */
     public function show(Wilfer $wilfer): Response
     {
-        return $this->render('adminWilfer/show.html.twig', [
+        return $this->render('admin_wilfer/show.html.twig', [
             'wilfer' => $wilfer,
         ]);
     }
@@ -102,7 +102,7 @@ class AdminWilferController extends AbstractController
             return $this->redirectToRoute('admin_wilfer_index');
         }
 
-        return $this->render('adminWilfer/edit.html.twig', [
+        return $this->render('admin_wilfer/edit.html.twig', [
             'wilfer' => $wilfer,
             'form' => $form->createView(),
         ]);

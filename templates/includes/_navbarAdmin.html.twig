@@ -1,5 +1,8 @@
 {% block stylesheets %}
 	{{ encore_entry_link_tags('navfoot') }}
+	<style>
+
+	</style>
 {% endblock %}
 <nav class="navbar navbar-expand-xl navbar navbar-dark bg-dark shadow p-2 d-flex flex-lg-row flex-column">
 	<div class="w-100 text-center text-xl-left">
@@ -19,18 +22,19 @@
 	<div class="collapse navbar-collapse w-100 text-left" id="navbarNav">
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item pr-3">
-				<a class="nav-link text-light" href="{{ path("admin_wilfer_index") }}">Wilfers</a>
+				<a class="nav-link" href="{{ path("admin_wilfer_index") }}">Wilfers</a>
 			</li>
 			<li class="nav-item pr-3">
-				<a class="nav-link text-light" href="{{ path("admin_entertainement_index") }}">Evènements</a>
+				<a class="nav-link" href="{{ path("admin_entertainement_index") }}">Evènements</a>
 			</li>
 			<li class="nav-item pr-3">
-				<a class="nav-link text-light" href="{{ path("admin_faq_index") }}">F.A.Q</a>
+				<a class="nav-link" href="{{ path("admin_faq_index") }}">F.A.Q</a>
 			</li>
 			<li class="nav-item dropdown pr-3">
 				<a class="nav-link dropdown-toggle pt-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-fill" viewbox="0 0 16 16">
-						<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+						<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+						<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
 					</svg>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right">

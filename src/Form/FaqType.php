@@ -16,10 +16,13 @@ class FaqType extends AbstractType
     {
         $builder
             ->add('subject', TextType::class, [
-            'label' => 'Question',
+                'label' => 'Question',
+                'attr' => ['class' => 'input']
             ])
             ->add('feedback', CKEditorType::class, [
                 'label' => 'Réponse',
+                'attr' => ['class' => 'input']
+
             ]);
     }
 

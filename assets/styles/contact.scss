@@ -60,3 +60,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
 }
+
+legend.col-form-label {
+  font-size: $font-size;
+}

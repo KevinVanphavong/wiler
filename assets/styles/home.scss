@@ -51,11 +51,13 @@
   height: 100%;
   z-index: 11;
   clip-path: polygon(0 0, 65% 0, 44% 100%, 0% 100%);
-  background: linear-gradient(
+  background:linear-gradient(
     135deg,
-    rgba($light, 1) 0%,
-    rgba($primary, 0.9) 60%,
-    rgba($primary, 0.85) 100%
+    rgba($grey, 1) 0%,
+    rgba(183, 154, 53, 0.6993172268907564) 30%,
+    rgba(183, 154, 53, 0.8869922969187675) 45%,
+    rgba(183, 154, 53, 0.6993172268907564) 60%,
+    rgba($grey, 1) 100%,
   );
 }
 
@@ -65,24 +67,7 @@
   z-index: 12;
 }
 
-// .text-entertainement-card {
-//   width: 80%;
-//   height: auto;
-//   border-top: 2px solid $dark;
-//   border-left: 2px solid $dark;
-//   border-right: 2px solid $primary;
-//   border-bottom: 2px solid $primary;
-//   border-radius: 8px;
-//   box-shadow: 0 5px 5px darken($grey, 20%);
-//   background-color: $light;
-// }
-
-// .text-entertainement-card p {
-//   font-size: 14px;
-// }
-
 .box-card {
-  // max-width: 800px;
   height: 600px;
   position: relative;
   box-shadow: 4px 4px 10px lighten($black, 50%);
@@ -103,7 +88,7 @@
 
 .box-card .text-card p {
   margin: 0px;
-  font-size: 14px;
+  font-size: $font-size - 4px;
 }
 
 @media screen and (max-width: 990px) {

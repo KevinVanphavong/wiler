@@ -12,7 +12,7 @@
 	<section class="background-home">
 		<div class="background-first-image"></div>
 		<div class="text-on-background w-100 text-center text-light">
-			<h1>Accompagnements aux évènements
+			<h1 class="h2">Accompagnements aux évènements
 				<br>
 				pour les femmes</h1>
 			<p>
@@ -34,7 +34,7 @@
 			</h2>
 			<p class="text-center m-0">
 				Autrement dit, un ange envoyé et formé par l’école de la vie, la Wild Code School, pour rendre la vie
-				des femmes aussi belle qu’elles le sont
+				des femmes aussi belle qu’elles le sont.
 			</p>
 		</div>
 	</section>
@@ -47,11 +47,13 @@
 			</h2>
 			<p class="pb-5 m-0">
 				Ce que nous proposons est unique, une expérience de vie incroyable, car nos wilfers sont grandement
-				qualifiés pour les
-				situations situées ci-dessous. La bienveillance de notre équipe sera la pour vous faire vivre un agréable
-				moment tout au long de votre séjour en la compagnie d'un gentleman agréé. Nos wilfers ont été formés pour
-				vous aider et accompagner dans toutes ces situations, mais surtout vous rendre unique. Nous espérons que
-				vous percevrez cette expérience comme un rêve éveillé, mais que vous pouvez dirigé et réitérer à volonté.
+				qualifiés pour les situations situées ci-dessous. <br>
+				La bienveillance de notre équipe sera la pour vous faire vivre un agréable moment 
+				tout au long de votre séjour en la compagnie d'un gentleman agréé. <br>
+				Nos wilfers ont été formés pour
+				vous aider et accompagner dans toutes ces situations, mais surtout vous rendre unique.<br>
+				Nous espérons que vous percevrez cette expérience comme un rêve éveillé, 
+				mais que vous pouvez dirigé et réitérer à volonté.
 			</p>
 		</div>
 	</section>
@@ -149,4 +151,15 @@
 			</p>
 		</div>
 	</section>
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		let clipath = document.querySelector('.clipath');
+
+		window.addEventListener("scroll", function () {
+			let value = ((window.scrollY / 12)-10);
+			clipath.style.clipPath = 'polygon(0 0, ' + (20 + value) + '% 0, '+ (value) + '% 100%, 0% 100%)';
+		});
+	</script>
 {% endblock %}

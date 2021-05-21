@@ -24,7 +24,7 @@ class EntertainementController extends AbstractController
      */
     public function index(EntertainementRepository $entertainementRepository): Response
     {
-        return $this->render('entertainement/index.html.twig', [
+        return $this->render('admin_entertainement/index.html.twig', [
             'entertainements' => $entertainementRepository->findAll(),
         ]);
     }
@@ -59,7 +59,7 @@ class EntertainementController extends AbstractController
             return $this->redirectToRoute('admin_entertainement_index');
         }
 
-        return $this->render('entertainement/new.html.twig', [
+        return $this->render('admin_entertainement/new.html.twig', [
             'entertainement' => $entertainement,
             'form' => $form->createView(),
         ]);
@@ -72,7 +72,7 @@ class EntertainementController extends AbstractController
      */
     public function show(Entertainement $entertainement): Response
     {
-        return $this->render('entertainement/show.html.twig', [
+        return $this->render('admin_entertainement/show.html.twig', [
             'entertainement' => $entertainement,
         ]);
     }
@@ -103,7 +103,7 @@ class EntertainementController extends AbstractController
             return $this->redirectToRoute('admin_entertainement_index');
         }
 
-        return $this->render('entertainement/edit.html.twig', [
+        return $this->render('admin_entertainement/edit.html.twig', [
             'entertainement' => $entertainement,
             'form' => $form->createView(),
         ]);

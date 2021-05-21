@@ -1,27 +1,38 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Reception de mail</title>
-    </head>
-    <body>
-        <h1>Une personne vous a contacté par le biais du formulaire de contact :</h1>
-        <h2>{{ contact.firstname }} <span class="text-primary">{{ contact.lastname }}</span></h2>
-        <p>Sur le thème : {{ reason }}</p>
-        <p>Wilfers :
-        {% set union = "" %}
-        {% for wilfer in wilfers %}
-            {{ union ~ ' ' ~ wilfer.fullname }}
-            {% if union == "" %}
-                {% set union = "-" %}
-            {% endif %}
-        {% endfor %}
-        </p>
-        <p>Evènement choisi : {{ event.name }}</p>
-        <p>Temps de la prestation voulu : {{ duration }}</p>
-        <p>Message : {{ contact.otherReason }}</p>
-    </body>
-</html>
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<style>
+		p {
+			margin: 0;
+		}
+	</style>
+	<section class="container">
+		<h1 class="my-3">
+			<span class="text-primary">WILFER</span>
+			AGENCY</h1>
+		<p class="mb-3 h4">Mail recu pour le site via le formulaire de contact</p>
+
+		<p class="font-weight-bold">Emetteur :</p>
+		<ul style="list-style: none;">
+			<li>Monsieur Madame
+				{{ app.user.firstname }}
+				{{ app.user.lastname }}</li>
+			<li>Email
+				{{ '<' }}
+				{{ app.user.email }}
+				{{ '>' }}</li>
+		</ul>
+
+		<p class="font-weight-bold">Message :</p>
+		<p>
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit suscipit officiis, dolor itaque, delectus ducimus nihil illum, corrupti sint atque quos minus magni. Quidem inventore vero incidunt minima quas quasi similique quo eius asperiores iusto numquam, ut quod dolorem ad deserunt nostrum debitis molestias laudantium error, sed sint totam eum?"
+		</p>
+
+        <p>Type d'évènement</p>
+        <p class="mb-2">Marriage</p>
+
+        <p>Wilfer(s) choisi(s)</p>
+        <p></p>
+
+	</section>
+{% endblock %}

@@ -98,6 +98,20 @@ aside {
   color: #b79a35;
   background-color: $grey;
 }
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+ul.navbar-nav li.nav-item a.nav-link,
+ul.navbar-nav li.nav-item a.nav-link svg {
+  color: $light;
+}
+
+ul.navbar-nav li.nav-item a.nav-link:hover,
+ul.navbar-nav li.nav-item a.nav-link svg:hover {
+  color: $primary;
+}
 /**********/
 
 /****** FOOTER *****/

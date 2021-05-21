@@ -55,9 +55,15 @@ class Wilfer
      */
     private $wilferImages;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="wilfer")
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->wilferImages = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -141,6 +147,36 @@ class Wilfer
             // set the owning side to null (unless already changed)
             if ($wilferImage->getWilfer() === $this) {
                 $wilferImage->setWilfer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setWilfer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getWilfer() === $this) {
+                $comment->setWilfer(null);
             }
         }
 

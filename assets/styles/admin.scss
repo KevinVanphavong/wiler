@@ -25,3 +25,13 @@
 input {
   color: $dark;
 }
+
+label {
+  color: $dark;
+  font-style: normal;
+  font-weight : normal;
+}
+
+a.btn-danger {
+  font-style: normal;
+}

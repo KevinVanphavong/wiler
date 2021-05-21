@@ -27,13 +27,6 @@ class ContactController extends AbstractController
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
-        
-        // dump(
-            //     gettype($form->get('duration')->getData()),
-            //     $form->get('duration')->getData(),
-            //     gettype($form->get('events')->getData()),
-            //     $form->get('events')->getData(),
-            // );die();
             
         if ($form->isSubmitted() && $form->isValid()) {
             $reason = $form->get('events')->getData()->getName();
@@ -55,5 +48,13 @@ class ContactController extends AbstractController
         return $this->render('contact/index.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/contact-view", name="contactView")
+     */
+    public function newcContact(Request $request, MailerInterface $mailer): Response
+    {
+        return $this->render('contact/mail.html.twig');
     }
 }

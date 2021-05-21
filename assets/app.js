@@ -32,10 +32,3 @@ $(document).ready(() => {
     $('[data-toggle="popover"]').popover();
     bsCustomFileInput.init();
 });
-
-
-let clipath = document.querySelector('.clipath');
-window.addEventListener("scroll", function () {
-    let value = ((window.scrollY / 10)-10);
-    clipath.style.clipPath = 'polygon(0 0, ' + (20 + value) + '% 0, '+ (value) + '% 100%, 0% 100%)';
-});

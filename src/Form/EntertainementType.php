@@ -16,14 +16,16 @@ class EntertainementType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Type d\'évènement'
+                'label' => 'Type d\'évènement',
+                'attr' => ['class' => 'input']
             ])
             ->add('description', CKEditorType::class)
             ->add('entertainementImages', FileType::class, [
                 'multiple' => true,
                 'required' => false,
                 'mapped' => false,
-                'label' => 'Ajouter des images'
+                'label' => 'Ajouter des images',
+                'attr' => ['class' => 'input']
             ]);
         ;
     }

@@ -12,10 +12,11 @@
             </strong>
         </h1>
 
-        {{ include('entertainement/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        {{ include('admin_entertainement/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-        <a href="{{ path('admin_entertainement_index') }}" class="btn btn-danger mb-3">Retour à la liste des
-            évènements</a>
+        <a href="{{ path('admin_entertainement_index') }}" class="btn btn-danger mb-3">
+            Retour à la liste des évènements
+        </a>
 
     </section>
 {% endblock %}

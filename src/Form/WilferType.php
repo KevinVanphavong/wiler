@@ -19,25 +19,31 @@ class WilferType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label' => 'Prénom'
+                'label' => 'Prénom',
+                'attr' => ['class' => 'input']
             ])
             ->add('lastname', TextType::class, [
-                'label' => 'Nom'
+                'label' => 'Nom',
+                'attr' => ['class' => 'input']
             ])
             ->add('birthAt', DateType::class, [
                 'label' => 'Née le',
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'attr' => ['class' => 'input']
             ])
             ->add('Description', TextType::class, [
-                'label' => 'Phrase d\'accroche'
+                'label' => 'Phrase d\'accroche',
+                'attr' => ['class' => 'input']
+
             ])
 
             ->add('wilferImages', FileType::class, [
                 'multiple' => true,
                 'required' => false,
                 'mapped' => false,
-                'label' => 'Ajouter des images'
+                'label' => 'Ajouter des images',
+                'attr' => ['class' => 'input']
             ]);
     }
 

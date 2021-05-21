@@ -1,0 +1,265 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	Wilfer Agency - Wilfer n°{{ wilfer.id }}
+	-
+	{{ wilfer.firstname }}
+	{{ wilfer.lastname }}
+{% endblock %}
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('wilfers') }}
+	<style>
+		ul li {
+			margin: 1em 0;
+		}
+		ul li span:first-child {
+			padding: 10px 20px;
+			background: black;
+		}
+		ul li span:last-child {
+			padding: 10px 20px;
+			background: #B79A35;
+			color: whitesmoke;
+		}
+		.wilfer-selfie {
+			width: 300px;
+			height: auto;
+			border-radius: 50%;
+			border: 2px solid whitesmoke;
+			box-shadow: 3px 3px 10px grey;
+			object-fit: cover;
+		}
+		.one-comment {
+			width: 50%;
+			border-top: 3px outset whitesmoke;
+			border-left: 3px outset whitesmoke;
+			border-radius: 10px;
+			padding: 10px 20px;
+			box-shadow: 3px 3px 10px lightgrey;
+			transition: 0.5s ease;
+		}
+		.one-comment:hover {
+			transform: scale(1.05);
+			box-shadow: 5px 5px 15px lightgrey;
+		}
+
+		.one-comment.active {
+			display: block;
+			animation: fade 10s; 
+		}
+
+		@keyframes fade {
+			0% {
+				opacity: 0;
+				transform: translateX(-100%)
+			}
+			10%, 90% {
+				opacity: 1;
+				transform: translateX(0%)
+			}
+			100% {
+				opacity: 0;
+				transform: translateX(100%)
+			}
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	{% set wilferAge = ((date('now') | date('Y')) - (wilfer.birthAt | date('Y'))) %}
+	<section class="container py-5">
+		<div class="d-lg-inline-flex d-block flex-wrap">
+			<h1>
+				Une présentation de notre wilfer
+			</h1>
+			<div class="d-flex">
+				<h2 class=" h1 text-primary font-weight-bold font-italic">{{ ' _' ~ wilfer.firstname }}
+					<span class="text-dark font-weight-normal">{{ ' ' ~wilfer.lastname | upper }}</span>
+					<span>
+						{% if app.user %}
+							<a id="favoritesWilfers" href="{{ path("wilfer_favorites", {id: wilfer.id}) }}" class="align-top">
+								{% if app.user.isInFavoritesWilfer(wilfer) == true %}
+									<img src="{{ asset('build/images/full-heart.jpg') }}" class="heart-icon">
+								{% else %}
+									<img src="{{ asset('build/images/empty-heart.jpg') }}" class="heart-icon">
+								{% endif %}
+							</a>
+						{% endif %}
+					</span>
+				</h2>
+			</div>
+		</div>
+		<hr>
+		<div class="d-flex flex-lg-row flex-column justify-content-between">
+			<ul class="list-unstyled d-flex flex-column justify-content-center align-items-lg-start align-items-center mt-lg-0 mt-2">
+				<li class="h4">
+					<span class="text-primary">Prénom</span>
+
+					<span>{{ wilfer.firstname }}</span>
+				</li>
+				<li class="h4">
+					<span class="text-primary">Nom</span>
+
+					<span>{{ wilfer.lastname }}</span>
+				</li>
+				<li class="h4">
+					<span class="text-primary">Né le</span>
+
+					<span>{{ wilfer.birthAt | date('d/m/Y') }}</span>
+				</li>
+				<li class="h4">
+					<span class="text-primary">Age</span>
+
+					<span>{{ wilferAge }}ans</span>
+				</li>
+				<li class="h4">
+					<span class="text-primary">Description</span>
+					<span>"
+						{{ wilfer.description }}
+						"</li>
+				</li>
+			</ul>
+			<div class="d-flex justify-content-center my-lg-2 my-4 block-wilfer-img">
+				{% if wilfer.wilferImages | length > 0 %}
+					<img src="{{ asset('uploads/wilfersImages/' ~ wilfer.wilferImages[0].name) }}" alt="" class="wilfer-selfie">
+				{% endif %}
+			</div>
+		</div>
+		<hr>
+		<section class="comments">
+			<h2>
+				Les avis de nos membres ({{ wilfer.comments | length }})
+			</h2>
+			{% if wilfer.comments | length > 0 %}
+				{% set moyenne = 0 %}
+				{% for comment in wilfer.comments %}
+					{% set moyenne = moyenne + comment.note %}
+				{% endfor %}
+				{% set moyenne = moyenne / (wilfer.comments | length) %}
+				<p class="mb-0">Note moyenne : 
+				{% for i in 1.. moyenne | round %}
+					⭐
+				{% endfor %}
+				</p> 
+			{% endif %}
+			<div class="all-comments d-flex justify-content-center">
+				{% if wilfer.comments | length > 0 %}
+					{% for comment in wilfer.comments %}
+						{# <div class="one-comment col-lg-3 col-md-5 col-10 m-2 d-flex flex-column justify-content-around"> #}
+						<div class="one-comment d-none my-3">
+							<div class="d-flex justify-content-between">
+								<p class="mb-0">{{ comment.author.firstname ~ ' ' ~ comment.author.lastname }}</p>
+								{% if app.user %}
+									{% if is_granted("ROLE_ADMIN") or app.user.email == comment.author.email %}
+										<span>{{ include('admin_comment/_delete_form.html.twig') }}</span>
+									{% endif %}
+								{% endif %}
+							</div>
+							{% for i in 1..(comment.note) %}
+								⭐
+							{% endfor %}
+							<p class="font-italic font-weight-bold mb-0">"
+								{{ comment.content }}
+								"</p>
+						</div>
+					{% endfor %}
+				{% else %}
+					<p class="mb-0">(Pas de commentaire pour le moment)</p>
+				{% endif %}
+			</div>
+		</section>
+		<hr>
+		<div id="accordion">
+			<div class="card">
+				<div class="card-header" id="headingOne">
+					<button class="btn btn-link text-decoration-none" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+						<h3 class="h4 mb-0">
+							Ecrire un commentaire sur ce Wilfer
+						</h3>
+					</button>
+				</div>
+
+				<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+					<div class="card-body">
+						{{ form_start(formComment) }}
+						{{ form_widget(formComment) }}
+						<button class="btn btn-primary">{{ 'Envoyer'|trans }}</button>
+						{{ form_end(formComment) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+
+
+{% block javascripts %}
+{{ parent() }}
+	<script>
+	
+	// AJAX ajouter favorites wilfers
+	let btnToFavorites = document.querySelector("#favoritesWilfers")
+	btnToFavorites.addEventListener('click', addToFavoritesWilfers);
+	
+	function addToFavoritesWilfers(event) {
+		event.preventDefault();
+		fetch(this.getAttribute('href'))
+
+		if (event.currentTarget.firstElementChild.getAttribute('src') == "{{ asset('build/images/full-heart.jpg') }}") {
+			event.currentTarget.firstElementChild.setAttribute('src', "{{ asset('build/images/empty-heart.jpg') }}")
+		} else {
+			event.currentTarget.firstElementChild.setAttribute('src', "{{ asset('build/images/full-heart.jpg') }}")
+		}
+	}
+
+	// Carousel des commentaires
+	const comments = document.querySelectorAll('.one-comment');
+	const nbSlide = comments.length // 7
+	let count = 1
+
+	comments.item(0).classList.remove('d-none');
+	comments.item(0).classList.add('active')
+
+	function nextSlide(){
+		document.querySelector('.active').classList.add('d-none');
+		document.querySelector('.active').classList.remove('active');
+
+		comments.item(count).classList.remove('d-none');
+		comments.item(count).classList.add('active')
+
+		if(count < nbSlide - 1){
+			count ++
+		} else {
+			count = 0;
+		}
+	}
+
+	function previousSlide(){
+		document.querySelector('.active').classList.add('d-none');
+		document.querySelector('.active').classList.remove('active');
+
+		comments.item(count).classList.remove('d-none');
+		comments.item(count).classList.add('active')
+
+		if(count > 0){
+			count --
+		} else {
+			count = nbSlide - 1;
+		}
+	}
+	
+	function keyPress(e){
+		if(e.keyCode == "37"){
+			previousSlide();
+		} else if(e.keyCode == "39"){
+			nextSlide();
+		}
+	}
+
+	if(comments.length != 1){
+		setInterval(nextSlide, 10000);
+		document.addEventListener('keydown', keyPress)
+	}
+	</script>
+{% endblock %}

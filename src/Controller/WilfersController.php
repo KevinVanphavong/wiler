@@ -3,10 +3,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Wilfer;
+use App\Form\CommentType;
 use App\Form\SearchWilferType;
+use App\Repository\CommentRepository;
 use App\Repository\PlaylistRepository;
 use App\Repository\WilferRepository;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,6 +46,31 @@ class WilfersController extends AbstractController
     }
 
     /**
+     * @Route("/wilfer/{id}/show", name="wilfer_id_show")
+     */
+    public function showWilfer(Request $request, Wilfer $wilfer):Response
+    {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $comment->setWilfer($wilfer);
+            $comment->setAuthor($this->getUser());
+            $comment->setDate(new DateTime());
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            return $this->redirectToRoute('wilfer_id_show', ['id' => $wilfer->getId()]);
+        }
+
+        return $this->render('wilfers/show.html.twig', [
+            'wilfer' => $wilfer,
+            'formComment' => $form->createView()
+        ]);
+    }
+
+    /**
      * @Route("wilfer/{id}/favorites", name="wilfer_favorites")
      * @param Wilfer $wilfer
      * @param EntityManagerInterface $entityManager
@@ -57,6 +86,8 @@ class WilfersController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->redirectToRoute('wilfers');
+        return $this->json([
+            'isInFavoritesWilfer' => $this->getUser()->isInFavoritesWilfer($wilfer)
+        ]);
     }
 }

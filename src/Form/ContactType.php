@@ -24,11 +24,11 @@ class ContactType extends AbstractType implements FormTypeInterface
         $builder
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
-                'attr' => ['placeholder' => 'John']
+                'attr' => ['placeholder' => 'John', 'class' => 'input']
             ])
             ->add('lastname', TextType::class, [
                 'label' => 'Nom',
-                'attr' => ['placeholder' => 'Doe']
+                'attr' => ['placeholder' => 'Doe', 'class' => 'input']
             ])
             ->add('duration', ChoiceType::class, [
                 "choices" => [
@@ -38,7 +38,7 @@ class ContactType extends AbstractType implements FormTypeInterface
                     "9 heures" => "9 heures",
                     "Autres (précisez votre durée souhaité dans l'encadré ci-dessous)" => "Autres",
                 ],
-                'attr' => ['class' => 'text-primary duration'],
+                'attr' => ['class' => 'text-primary duration input'],
                 'mapped'    => false,
                 'label' => "Définir un créneau"
             ])
@@ -50,11 +50,10 @@ class ContactType extends AbstractType implements FormTypeInterface
                 'by_reference' => false,
                 'mapped'    => false,
                 'label' => 'Choisir ses wilfers',
-                'attr' => ['class' => 'wilfers-to-select'],
-                'label_attr' => ['style' => 'font-size:18px']
+                'attr' => ['class' => 'wilfers-to-select input'],
             ])
             ->add('email', EmailType::class, [
-                'attr' => ['placeholder' => 'Johndoe@gmail.com']
+                'attr' => ['placeholder' => 'Johndoe@gmail.com', 'class' => 'input']
             ])
             ->add('events', EntityType::class, [
                 'class' => Entertainement::class,
@@ -64,7 +63,7 @@ class ContactType extends AbstractType implements FormTypeInterface
                 'by_reference' => false,
                 'mapped'    => false,
                 'label' => 'Type d\'évènement',
-                'attr' => ['class' => 'text-primary reason'],
+                'attr' => ['class' => 'text-primary reason input'],
 
             ])
             // ->add('reason', ChoiceType::class, [
@@ -78,7 +77,7 @@ class ContactType extends AbstractType implements FormTypeInterface
             //     'label' => 'Types d\'évènements'
             // ])
             ->add('otherReason', TextareaType::class, [
-                'attr' => ['placeholder' => 'Ecrivez votre raison ici'],
+                'attr' => ['placeholder' => 'Ecrivez votre raison ici', 'class' => 'input'],
                 'label' => 'Expliquez nous vos envies'
             ]);
     }
