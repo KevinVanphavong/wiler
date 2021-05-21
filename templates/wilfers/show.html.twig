@@ -195,7 +195,7 @@
 						{{ form_end(formComment) }}
 					</div>
 				{% else %}
-					<p class="mb-0">Vous devez être connecté pour écrire un commentaire</p>
+					<p class="m-3 text-center">Vous devez être connecté pour écrire un commentaire</p>
 				{% endif %}
 				</div>
 			</div>
@@ -205,24 +205,29 @@
 
 
 {% block javascripts %}
-{{ parent() }}
-	<script>
-	
-	// AJAX ajouter favorites wilfers
-	let btnToFavorites = document.querySelector("#favoritesWilfers")
-	btnToFavorites.addEventListener('click', addToFavoritesWilfers);
-	
-	function addToFavoritesWilfers(event) {
-		event.preventDefault();
-		fetch(this.getAttribute('href'))
+	{{ parent() }}
+	{% if app.user %}
+		<script>
+		
+		// AJAX ajouter favorites wilfers
+		let btnToFavorites = document.querySelector("#favoritesWilfers")
+		btnToFavorites.addEventListener('click', addToFavoritesWilfers);
+		
+		function addToFavoritesWilfers(event) {
+			event.preventDefault();
+			fetch(this.getAttribute('href'))
 
-		if (event.currentTarget.firstElementChild.getAttribute('src') == "{{ asset('build/images/full-heart.jpg') }}") {
-			event.currentTarget.firstElementChild.setAttribute('src', "{{ asset('build/images/empty-heart.jpg') }}")
-		} else {
-			event.currentTarget.firstElementChild.setAttribute('src', "{{ asset('build/images/full-heart.jpg') }}")
+			if (event.currentTarget.firstElementChild.getAttribute('src') == "{{ asset('build/images/full-heart.jpg') }}") {
+				event.currentTarget.firstElementChild.setAttribute('src', "{{ asset('build/images/empty-heart.jpg') }}")
+			} else {
+				event.currentTarget.firstElementChild.setAttribute('src', "{{ asset('build/images/full-heart.jpg') }}")
+			}
 		}
-	}
+		</script>
+	{% endif %}
 
+
+	<script>
 	// Carousel des commentaires
 	const comments = document.querySelectorAll('.one-comment');
 	const nbSlide = comments.length // 7
