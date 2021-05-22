@@ -41,7 +41,7 @@ class CommentController extends AbstractController
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('admin_comment_index');
+            return $this->redirectToRoute('admin_dashboard');
         }
 
         return $this->render('admin_comment/new.html.twig', [
@@ -73,7 +73,7 @@ class CommentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_comment_index');
+            return $this->redirectToRoute('admin_dashboard');
         }
 
         return $this->render('admin_comment/edit.html.twig', [
@@ -96,8 +96,8 @@ class CommentController extends AbstractController
             $entityManager->flush();
         }
         
-        if($request->request->get('_route') == "admin_comment_edit" || $request->request->get('_route') == "admin_comment_index"){
-            return $this->redirectToRoute('admin_comment_index');
+        if($request->request->get('_route') == "admin_comment_edit" || $request->request->get('_route') == "admin_dashboard"){
+            return $this->redirectToRoute('admin_dashboard');
         } else {
             return $this->redirectToRoute('wilfer_id_show', ['id' => $wilfer->getId()]);
         }

@@ -53,7 +53,7 @@ class AdminFaqController extends AbstractController
 
             $this->addFlash('success', 'La nouvelle question/réponse a bien été ajoutée');
 
-            return $this->redirectToRoute('admin_faq_index');
+            return $this->redirectToRoute('admin_dashboard');
         }
         return $this->render('admin_faq/new.html.twig', [
             "form" => $form->createView(),
@@ -76,7 +76,7 @@ class AdminFaqController extends AbstractController
 
             $this->addFlash('success', 'La question/réponse a bien été modifiée');
 
-            return $this->redirectToRoute('admin_faq_index');
+            return $this->redirectToRoute('admin_dashboard');
         }
 
         return $this->render('admin_faq/edit.html.twig', [
@@ -101,6 +101,6 @@ class AdminFaqController extends AbstractController
             $this->addFlash('success', 'La question/réponse a bien été suprimée');
         }
 
-        return $this->redirectToRoute('admin_faq_index');
+        return $this->redirectToRoute('admin_dashboard');
     }
 }

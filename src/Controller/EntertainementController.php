@@ -56,7 +56,7 @@ class EntertainementController extends AbstractController
             $entityManager->persist($entertainement);
             $entityManager->flush();
 
-            return $this->redirectToRoute('admin_entertainement_index');
+            return $this->redirectToRoute('admin_dashboard');
         }
 
         return $this->render('admin_entertainement/new.html.twig', [
@@ -100,7 +100,7 @@ class EntertainementController extends AbstractController
             }
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_entertainement_index');
+            return $this->redirectToRoute('admin_dashboard');
         }
 
         return $this->render('admin_entertainement/edit.html.twig', [
@@ -120,7 +120,7 @@ class EntertainementController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('admin_entertainement_index');
+        return $this->redirectToRoute('admin_dashboard');
     }
 
     /**

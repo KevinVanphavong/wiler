@@ -2,25 +2,136 @@
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('admin') }}
+    <style>
+        .dashboard {
+            border: 2px solid rgb(107, 91, 31);
+            border-radius: 8px;
+            box-shadow: 2px 4px 8px 0px rgb(183, 154, 53), 4px 8px 10px 0px #7c7c7c;
+            height: auto;
+        }
+        .container-onglets {
+            /* border-right: 2px solid rgb(107, 91, 31); */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;        
+        }
+        /* .container-onglets .onglet:not(:last-child) {
+            border-bottom: 2px solid rgb(107, 91, 31);
+        } */
+        .container-onglets > .onglet {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 10px;
+            cursor: pointer;
+        }
+
+        .container-contents {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            position: relative;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(183,154,53,1) 0%, rgba(0,0,0,1) 15%, rgba(2,0,36,1) 81%, rgba(183,154,53,1) 100%);
+        }
+
+
+        .active {
+            background: rgb(183, 154, 53);
+            color: #F1F1F1;
+            transition: 0.5s ease;
+        }
+
+        .activeContent {
+            animation: fade 0.5s forwards;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+
+            }
+        }
+
+    </style>
 {% endblock %}
 
 {% block body %}
+    <div class="background-admin-image"></div>
+
     <section class="py-5 container">
-        <h1 class="text-center mb-5">Espace administrateur</h1>
-        <div class="dashboard d-flex flex-wrap flex-column align-items-center">
-            <a href="{{ path('admin_wilfer_index') }}" class="text-center p-2 w-50 my-2 text-decoration-none">
-                Wilfers
-            </a>
-            <a href="{{ path('admin_faq_index') }}" class="text-center p-2 w-50 my-2 text-decoration-none">
-                F.A.Q
-            </a>
-            <a href="{{ path('admin_entertainement_index') }}" class="text-center p-2 w-50 my-2 text-decoration-none">
-                Evènements
-            </a>
-            <a href="{{ path('admin_comment_index') }}" class="text-center p-2 w-50 my-2 text-decoration-none">
-                Commentaires
-            </a>
+        <h1 class="text-center mb-5">Bienvenue sur votre <span class="text-primary">espace</span> administrateur</h1>
+        <div class="dashboard d-flex flex-column">
+            <div class="container-onglets">
+                <div data-anim="1" class="onglet active"><p class="mb-0">Wilfers</p></div>
+                <div data-anim="2" class="onglet"><p class="mb-0">Evènements</p></div>
+                <div data-anim="3" class="onglet"><p class="mb-0">Commentaires</p></div>
+                <div data-anim="4" class="onglet"><p class="mb-0">F.A.Q</p></div>
+            </div>
+            <div class="container-contents">
+                <div data-anim="1" class="content activeContent">
+                    {% include 'admin_wilfer/index.html.twig' %}
+                </div>
+                <div data-anim="2" class="content d-none">
+                    {% include 'admin_entertainement/index.html.twig' %}
+                </div>
+                <div data-anim="3" class="content d-none">
+                    {% include 'admin_comment/index.html.twig' %}
+                </div>
+                <div data-anim="4" class="content d-none">
+                    {% include 'admin_faq/indexAdmin.html.twig' %}
+                </div>
+            </div> 
         </div>
     </section>
 
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        const onglets = document.querySelectorAll('.onglet');
+        const contents = document.querySelectorAll('.content');
+
+        let index= 0;
+
+        onglets.forEach(onglet => {
+            onglet.addEventListener('click', () => {
+                if(onglet.classList.contains('active')){
+                    return;
+                } else {
+                    onglet.classList.add('active');
+                }
+        
+                index = onglet.getAttribute('data-anim');
+                console.log(index)
+
+                for(i = 0; i < onglets.length; i++ ){
+                    if(onglets[i].getAttribute('data-anim') != index){
+                        onglets[i].classList.remove('active');
+                    }
+                }
+
+                for(j = 0; j < contents.length; j++){
+                    if(contents[j].getAttribute('data-anim') == index){
+                        contents[j].classList.add('activeContent');
+                        contents[j].classList.remove('d-none');
+                    } else {
+                        contents[j].classList.remove('activeContent');
+                        contents[j].classList.add('d-none');
+                    }
+                }
+
+            })
+
+        });
+
+    </script>
 {% endblock %}

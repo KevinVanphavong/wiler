@@ -1,17 +1,10 @@
-{% extends 'layoutAdmin.html.twig' %}
+			<style>
+			.admin-faq-feedback p {
+				margin-bottom: 0px;
+			}
+			</style>
 
-{% block title %}FAQ |
-	{{ parent() }}
-{% endblock %}
-
-{% block stylesheets %}
-	{{ encore_entry_link_tags('faq') }}
-{% endblock %}
-
-{% block body %}
-	<main class="sheettop container">
-		<section class="container my-5">
-			<h1 class="mb-5 text-center">Liste des questions FAQ</h1>
+			<h1 class="mb-5 text-center text-light">Liste des questions <strong class="text-primary font-italic">FAQ</strong></h1>
 			<a class="btn btn-primary mb-3 text-light" href="{{ path('admin_faq_new') }}">
 				<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 					<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -20,7 +13,7 @@
 				Ajouter une nouvelle question
 			</a>
 			<div class="table-responsive">
-				<table class="table table-hover text-center">
+				<table class="table bg-light table-hover text-center">
 					<thead class="table bg-primary text-light">
 						<tr>
 							<th scope="col">Question</th>
@@ -53,11 +46,5 @@
 					</tbody>
 				</table>
 			</div>
-			<a class="btn btn-danger" href="{{ path("admin_dashboard") }}">
-				Retour à l'accueil d'administration
-			</a>
-		</section>
-	</main>
 
 
-{% endblock %}

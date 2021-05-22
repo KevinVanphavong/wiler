@@ -99,7 +99,7 @@ class AdminWilferController extends AbstractController
             }
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_wilfer_index');
+            return $this->redirectToRoute('admin_dashboard');
         }
 
         return $this->render('admin_wilfer/edit.html.twig', [
@@ -122,7 +122,7 @@ class AdminWilferController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('admin_wilfer_index');
+        return $this->redirectToRoute('admin_dashboard');
     }
 
     /**

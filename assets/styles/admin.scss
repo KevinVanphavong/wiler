@@ -8,20 +8,6 @@
   border-radius: 50%;
 }
 
-.dashboard {
-  > a {
-    border: 2px solid $primary;
-    border-radius: 8px;
-    background-color: $light;
-  }
-
-  > a:hover {
-    border: 2px solid darken($light, 15%);
-    background-color: $primary;
-    color: $light;
-  }
-}
-
 input {
   color: $dark;
 }
@@ -34,4 +20,14 @@ label {
 
 a.btn-danger {
   font-style: normal;
+}
+
+// background image
+.background-admin-image {
+  background-image: url("../images/wilfer9.jpg");
+  background-size: cover;
+  background-position: 0 20%;
+  height: 25vh;
+  filter: brightness(50%);
+  box-shadow: 0 5px 5px grey;
 }

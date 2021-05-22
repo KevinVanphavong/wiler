@@ -1,23 +1,9 @@
-{% extends 'layoutAdmin.html.twig' %}
-
-{% block title %}Commentaires index
-{% endblock %}
-
-{% block body %}
-	<section class="container my-5">
-		<h1 class="mb-5 text-center">Liste des
+		<h1 class="mb-5 text-center text-light">Liste des
 			<strong class="text-primary font-italic">commentaires</strong>
 		</h1>
-		{# <a class="btn btn-primary mb-3 text-light" href="{{ path('comment_new') }}">
-			<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-				<path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-			</svg>
-			Ajouter un nouveau commentaire
-		</a> #}
 
 		<div class="table-responsive">
-			<table class="table table-hover text-center">
+			<table class="table bg-light table-hover text-center">
 				<thead class="table bg-primary text-light rounded">
 					<tr>
 						<th>Wilfer</th>
@@ -63,8 +49,3 @@
 				</tbody>
 			</table>
 		</div>
-		<a class="btn btn-danger" href="{{ path("admin_dashboard") }}">
-			Retour à l'accueil d'administration
-		</a>
-	</section>
-{% endblock %}
