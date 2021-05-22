@@ -84,3 +84,64 @@
     border: 2px solid lighten($primary, 25%);
     border-radius: 8px;
 }
+
+
+// the page showing one specific wilfer
+ul li {
+    margin: 1em 0;
+}
+ul li span:first-child {
+    padding: 10px 20px;
+    background: black;
+}
+ul li span:last-child {
+    padding: 10px 20px;
+    background: #B79A35;
+    color: whitesmoke;
+}
+.wilfer-selfie {
+    width: 300px;
+    height: auto;
+    border-radius: 50%;
+    border: 2px solid whitesmoke;
+    box-shadow: 3px 3px 10px grey;
+    object-fit: cover;
+}
+.one-comment {
+    min-width: 50%;
+    width: auto;
+    border-top: 3px outset whitesmoke;
+    border-left: 3px outset whitesmoke;
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-shadow: 3px 3px 10px lightgrey;
+    transition: 0.5s ease;
+}
+.one-comment:hover {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 15px lightgrey;
+}
+
+.one-comment.active {
+    display: block;
+    animation: fade 10s; 
+}
+
+#comment div.form-group:nth-child(3){
+    display: none;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%)
+    }
+    10%, 90% {
+        opacity: 1;
+        transform: translateX(0%)
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100%)
+    }
+}

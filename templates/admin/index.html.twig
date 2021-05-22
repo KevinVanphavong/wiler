@@ -2,63 +2,6 @@
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('admin') }}
-    <style>
-        .dashboard {
-            border: 2px solid rgb(107, 91, 31);
-            border-radius: 8px;
-            box-shadow: 2px 4px 8px 0px rgb(183, 154, 53), 4px 8px 10px 0px #7c7c7c;
-            height: auto;
-        }
-        .container-onglets {
-            /* border-right: 2px solid rgb(107, 91, 31); */
-            display: flex;
-            justify-content: space-around;
-            align-items: center;        
-        }
-        /* .container-onglets .onglet:not(:last-child) {
-            border-bottom: 2px solid rgb(107, 91, 31);
-        } */
-        .container-onglets > .onglet {
-            height: 100%;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px 10px;
-            cursor: pointer;
-        }
-
-        .container-contents {
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-            position: relative;
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(183,154,53,1) 0%, rgba(0,0,0,1) 15%, rgba(2,0,36,1) 81%, rgba(183,154,53,1) 100%);
-        }
-
-
-        .active {
-            background: rgb(183, 154, 53);
-            color: #F1F1F1;
-            transition: 0.5s ease;
-        }
-
-        .activeContent {
-            animation: fade 0.5s forwards;
-        }
-
-        @keyframes fade {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-
-            }
-        }
-
-    </style>
 {% endblock %}
 
 {% block body %}
