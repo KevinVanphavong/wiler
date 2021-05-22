@@ -6,6 +6,10 @@
 
 {% block stylesheets %}
 	{{ encore_entry_link_tags('wilfers') }}
+	<style>
+		.wilfer {
+background: linear-gradient(135deg, rgba(183,154,53,1) 0%, rgba(2,0,36,1) 24%, rgba(2,0,36,1) 81%, rgba(183,154,53,1) 100%);		}
+	</style>
 {% endblock %}
 
 {% block body %}
@@ -36,6 +40,7 @@
 
 		<div class="d-flex flex-wrap justify-content-lg-around justify-content-center">
 			{% for wilfer in wilfers %}
+				{% set wilferAge = ((date('now') | date('Y')) - (wilfer.birthAt | date('Y'))) %}
 				<div class="wilfer p-0 my-3 col-lg-5 col-10 d-flex flex-sm-row flex-column">
 					<div class="div-heart-icon">
 						{% if app.user %}
@@ -58,16 +63,17 @@
 						</div>
 					{% endif %}
 					<div class="d-flex flex-column justify-content-around p-lg-2 p-4 wilfer-div-text">
-						<h2 class="mb-2 h4">{{ wilfer.firstname }}
-							<span class="text-light">{{ wilfer.lastname }}</span>
+						<h2 class="mb-2 h4 text-info">{{ wilfer.firstname }}
+							<span class="text-primary">{{ wilfer.lastname }}</span>
 						</h2>
-						<p class="mb-2">Né le
-							<span class="text-light">{{ wilfer.birthAt|date("m/d/Y") }}</span>
+						<p class="mb-0">
+							<span class="text-info">{{ wilfer.birthAt|date("m/d/Y") }} - </span>
+							<span class="text-primary">{{ wilferAge }} ans</span>
 						</p>
-						<p class="mb-2">"
-							<i class="text-light">{{ wilfer.description }}</i>
-							"</p>
-						<a class="btn" href="{{ path('wilfer_id_show', {'id': wilfer.id}) }}" style="width:auto;">En savoir plus</a>
+						<p class="mb-2 text-info">
+							"<i class="text-primary">{{ wilfer.description }}</i>"
+						</p>
+						<a class="btn" style="width:165px;" href="{{ path('wilfer_id_show', {'id': wilfer.id}) }}" style="width:auto;">En savoir plus</a>
 					</div>
 				</div>
 			{% endfor %}

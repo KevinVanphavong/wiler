@@ -31,8 +31,8 @@
 			object-fit: cover;
 		}
 		.one-comment {
-			width: 50%;
-			height: auto;
+			min-width: 50%;
+			width: auto;
 			border-top: 3px outset whitesmoke;
 			border-left: 3px outset whitesmoke;
 			border-radius: 10px;
@@ -96,7 +96,7 @@
 			</div>
 		</div>
 		<hr>
-		<div class="d-flex flex-lg-row flex-column justify-content-between">
+		<div class="d-flex flex-lg-row flex-column justify-content-around">
 			<ul class="list-unstyled d-flex flex-column justify-content-center align-items-lg-start align-items-center mt-lg-0 mt-2">
 				<li class="h4">
 					<span class="text-primary">Prénom</span>
@@ -120,9 +120,7 @@
 				</li>
 				<li class="h4">
 					<span class="text-primary">Description</span>
-					<span>"
-						{{ wilfer.description }}
-						"</li>
+					<span>"{{ wilfer.description }}"</li>
 				</li>
 			</ul>
 			<div class="d-flex justify-content-center my-lg-2 my-4 block-wilfer-img">
@@ -165,9 +163,7 @@
 									{{ '⭐' |trim }}
 								{% endfor %}
 							</p>
-							<p class="font-italic font-weight-bold mb-0">"
-								{{ comment.content }}
-								"</p>
+							<p class="font-italic font-weight-bold mb-0">{{ '"' ~ comment.content ~ '"' }}</p>
 						</div>
 					{% endfor %}
 				{% else %}

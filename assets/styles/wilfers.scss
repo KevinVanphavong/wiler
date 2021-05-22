@@ -57,7 +57,7 @@
     box-shadow: 0 5px 5px darken($grey, 20%);
     border-radius: 8px;
     border: 2px solid lighten($primary, 25%);
-    background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(183,154,53,0.8869922969187675) 49%, rgba(183,154,53,0.6993172268907564) 100%);
+    background: linear-gradient(135deg, rgba($primary, 1) 0%, rgba($dark,1) 24%, rgba($dark,1) 81%, rgba($primary, 1) 100%);
     .div-heart-icon {
         position: absolute;
         z-index: 10;
