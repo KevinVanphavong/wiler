@@ -6,6 +6,20 @@
 
 {% block stylesheets %}
 	{{ encore_entry_link_tags('home') }}
+	<style>
+
+	.box-card {
+		overflow: hidden;
+	}
+
+	.box-card .img-card {
+		transition: all 1s ease;
+	}
+
+	.box-card .img-card:hover {
+		transform: scale(1.15);
+	}
+	</style>
 {% endblock %}
 
 {% block body %}
@@ -68,6 +82,7 @@
 						<h2 class="h4">{{ entertainement.name }}</h2>
 						{{ entertainement.description | raw }}
 					</div>
+					<div class="text-card-cover text-center">...</div>
 				</div>
 			{% endfor %}
 		</div>
@@ -160,6 +175,19 @@
 		window.addEventListener("scroll", function () {
 			let value = ((window.scrollY / 12)-10);
 			clipath.style.clipPath = 'polygon(0 0, ' + (20 + value) + '% 0, '+ (value) + '% 100%, 0% 100%)';
+		});
+
+		const textCards = document.querySelectorAll('.text-card');
+
+		textCards.forEach(card => {
+			card.addEventListener('mouseover', () => {
+				card.nextElementSibling.innerHTML = ""
+				card.style.maxHeight = "100%"; 
+			})
+			card.addEventListener('mouseleave', () => {
+				setTimeout(function() {card.nextElementSibling.innerHTML = "..."}, 1000);
+				card.style.maxHeight = "20%"; 
+			})
 		});
 	</script>
 {% endblock %}
