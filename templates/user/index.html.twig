@@ -11,7 +11,7 @@
 			personnel</h1>
 	<section class="section-personnal-infos">
 		<div class="container px-0 py-5">
-			<h2>Vos <strong class="text-light font-italic mb-4">informations</strong> personnels :</h2>
+			<h2 class="text-lg-left text-center">Vos <strong class="text-light font-italic mb-4">informations</strong> personnels :</h2>
 			<hr>
 			{{ form_start(formUser) }}
 			{{ form_widget(formUser) }}
@@ -27,6 +27,7 @@
 			<hr>
 		<div class="d-flex flex-wrap justify-content-lg-between justify-content-center">
 			{% for favoritesWilfer in app.user.favoritesWilfers %}
+				{% set favoritesWilferAge = ((date('now') | date('Y')) - (favoritesWilfer.birthAt | date('Y'))) %}
 				<div class="wilfer-card  p-0 my-3 col-lg-5 col-10 d-flex">
 					<div class="div-heart-icon">
 						{% if app.user %}
@@ -48,15 +49,15 @@
 						<img src="" alt="" class="rounded wilfer-picture">
 					{% endif %}
 					<div class="d-flex flex-column justify-content-around p-2">
-						<p class="mb-2 text-dark h3">{{ favoritesWilfer.firstname }}
-							<span class="text-light">{{ favoritesWilfer.lastname }}</span>
+						<p class="mb-2 text-info h3">{{ favoritesWilfer.firstname }}
+							<span class="text-primary">{{ favoritesWilfer.lastname }}</span>
 						</p>
-						<p class="mb-2 text-dark">Née le :
-							<span class="text-light">{{ favoritesWilfer.birthAt|date("m/d/Y") }}</span>
+						<p class="mb-2 text-info">
+							{{ favoritesWilfer.birthAt|date("m/d/Y") }} -
+							<span class="text-primary">{{ favoritesWilferAge }} ans</span>
 						</p>
-						<p class="text-dark">Citation préférée :
-							<br>
-							"<span class="font-italic font-weight-bold text-light">{{ favoritesWilfer.Description }}</span>"
+						<p class="text-info">
+							"<span class="font-italic font-weight-bold text-primary">{{ favoritesWilfer.Description }}</span>"
 						</p>
 						<a class="btn wilfer-card-btn" href="{{ path('wilfer_id_show', {'id': favoritesWilfer.id}) }}" style="width:auto;">En savoir plus</a>
 					</div>
