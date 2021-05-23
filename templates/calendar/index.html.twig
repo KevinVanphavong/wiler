@@ -1,0 +1,91 @@
+{% extends 'layoutAdmin.html.twig' %}
+
+{% block title %}Calendar index{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.css" 
+    integrity="sha256-r2s/dK+UgUBU0+4kDK93RVTOO5qbzD+XIRJDOxKlTFM=" 
+    crossorigin="anonymous">
+    <style>
+        #calendar {
+            width: 80%;
+            height: 200%;
+            margin: auto;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1>Calendar index</h1>
+
+    <div data-anim="5" class="text-primary p-3" id="calendar"></div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>StartAt</th>
+                <th>EndAt</th>
+                <th>Description</th>
+                <th>Allday</th>
+                <th>BackgroundColor</th>
+                <th>BorderColor</th>
+                <th>TextColor</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for calendar in calendars %}
+            <tr>
+                <td>{{ calendar.id }}</td>
+                <td>{{ calendar.title }}</td>
+                <td>{{ calendar.startAt ? calendar.startAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.endAt ? calendar.endAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.description }}</td>
+                <td>{{ calendar.allday ? 'Yes' : 'No' }}</td>
+                <td>{{ calendar.backgroundColor }}</td>
+                <td>{{ calendar.borderColor }}</td>
+                <td>{{ calendar.textColor }}</td>
+                <td>
+                    <a href="{{ path('calendar_show', {'id': calendar.id}) }}">show</a>
+                    <a href="{{ path('calendar_edit', {'id': calendar.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('calendar_new') }}">Create new</a>
+{% endblock %}
+
+{% block javascripts %}
+{# START - Full Calendar #}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.js" 
+    integrity="sha256-vB0AxkwD8fMGdgwuIfLl+VhH2pFA0ZtJdAJe4OHRKcs=" 
+    crossorigin="anonymous">
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'fr',
+            headerToolbar: {
+                left: 'prev,next today', center: 'title', right: 'dayGridMonth, timeGridWeek',
+            },
+            titleFormat: {
+                year: 'numeric', month: 'long', day: 'numeric',   // like 'September 8 2009', for day views
+            },
+        });
+        calendar.render();
+    });
+    </script>
+{# END - Full Calendar #}
+{% endblock %}

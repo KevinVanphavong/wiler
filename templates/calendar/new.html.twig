@@ -1,0 +1,15 @@
+{% extends 'layoutAdmin.html.twig' %}
+
+{% block title %}New Calendar{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block body %}
+<section class="container pb-5">
+        <h1 class="text-center py-5">Ajouter un nouveau <strong class="text-primary font-italic">rdv au calendrier</strong></h1>
+
+    {{ include('calendar/_form.html.twig') }}
+</section>
+{% endblock %}

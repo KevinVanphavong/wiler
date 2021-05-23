@@ -1,5 +1,9 @@
 @import 'app';
 
+.datetime-calendar {
+  font-size: $font-size;
+}
+
 .logo-user {
   height: 40px;
   width: 40px;
@@ -64,6 +68,7 @@ a.btn-danger {
   width: 100%;
   padding: 20px;
   background: linear-gradient(160deg, rgba($dark,1) 0%, rgba($dark,1) 81%, rgba($primary,1) 100%);
+  height: auto;
 }
 
 .active {

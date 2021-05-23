@@ -1,0 +1,5 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(form) }}
+	<a href="{{ path('admin_dashboard') }}" class="btn btn-danger mt-3">Retour au dashboard</a>

@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Calendar;
 use App\Entity\Comment;
 use App\Entity\Entertainement;
 use App\Entity\Faq;

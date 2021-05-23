@@ -2,28 +2,16 @@
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('admin') }}
-    <link rel="stylesheet" 
-    href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.css" 
-    integrity="sha256-r2s/dK+UgUBU0+4kDK93RVTOO5qbzD+XIRJDOxKlTFM=" 
-    crossorigin="anonymous">
-    <style>
-        #calendar {
-            width: 80%;
-            height: 100%;
-            margin: auto;
-        }
-    </style>
 {% endblock %}
 
 {% block body %}
     <div class="background-admin-image"></div>
 
-    <section class="mt-5 bg-dark">
-        <div id="calendar" class="text-primary p-3"></div>
-    </section>
-
     <section class="py-5 container">
         <h1 class="text-center mb-5">Bienvenue sur votre <span class="text-primary">espace</span> administrateur</h1>
+        <div class="mb-5 d-flex justify-content-center">
+            <a href="{{ path('calendar_index') }}" class="btn btn-primary text-light">Accéder au calendrier des réservations</a>
+        </div>
         <div class="dashboard d-flex flex-column">
             <div class="container-onglets">
                 <div data-anim="1" class="onglet active"><p class="mb-0">Wilfers</p></div>
@@ -52,30 +40,6 @@
 
 
 {% block javascripts %}
-{# START - Full Calendar #}
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.js" 
-    integrity="sha256-vB0AxkwD8fMGdgwuIfLl+VhH2pFA0ZtJdAJe4OHRKcs=" 
-    crossorigin="anonymous">
-    </script>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'fr',
-            headerToolbar: {
-                left: 'prev,next today', center: 'title', right: 'dayGridMonth, timeGridWeek',
-            },
-            titleFormat: {
-                year: 'numeric', month: 'long', day: 'numeric',   // like 'September 8 2009', for day views
-            }
-        });
-        calendar.render();
-    });
-    </script>
-{# END - Full Calendar #}
-
     {{ parent() }}
 
 {# START - Admin Onglet Fenêtres #}
