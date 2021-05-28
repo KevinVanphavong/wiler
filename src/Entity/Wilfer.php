@@ -76,6 +76,12 @@ class Wilfer
         return $this->firstname . ' ' . $this->getLastname();
     }
 
+    public function setFullName(string $string): self
+    {
+        $this->fullname = $string;
+        return $this;
+    }
+
     public function getFirstname(): ?string
     {
         return $this->firstname;

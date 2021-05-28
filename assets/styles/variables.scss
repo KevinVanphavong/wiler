@@ -1,10 +1,10 @@
-$light: #f1f1f1;
+$light: #ffffff;
 $dark: #0f0f0f;
 
 $grey: #E5E5E5;
 
 $primary: #b79a35;
-$secondary: darken($primary, 20%);
+$secondary: darken($grey, 35%);
 $info: lighten($primary, 30%);
 
 $text-font: 'Baskerville', sans-serif;

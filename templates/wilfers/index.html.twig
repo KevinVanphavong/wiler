@@ -63,8 +63,11 @@
 							<span class="text-primary">{{ wilfer.lastname }}</span>
 						</h2>
 						<p class="mb-0">
-							<span class="text-info">{{ wilfer.birthAt|date("m/d/Y") }} - </span>
-							<span class="text-primary">{{ wilferAge }} ans</span>
+							<span class="text-info">{{ wilfer.birthAt|date("m/d/Y") }}
+								-
+							</span>
+							<span class="text-primary">{{ wilferAge }}
+								ans</span>
 						</p>
 						<p class="mb-2 text-info">
 							"<i class="text-primary">{{ wilfer.description }}</i>"
@@ -79,24 +82,24 @@
 
 
 {% block javascripts %}
-{{ parent() }}
+	{{ parent() }}
 
-<script>
-	let btnToFavorites = document.querySelectorAll("#favoritesWilfers")
-	
-	btnToFavorites.forEach(element => {
-		element.addEventListener('click', addToFavoritesWilfers);
-	});
-	
-	function addToFavoritesWilfers(event) {
-		event.preventDefault();
-		fetch(this.getAttribute('href'))
+	<script>
+		let btnToFavorites = document.querySelectorAll("#favoritesWilfers")
 
-		if (event.currentTarget.firstElementChild.getAttribute('src') == "{{ asset('build/images/full-heart.jpg') }}") {
-			event.currentTarget.firstElementChild.setAttribute('src', "{{ asset('build/images/empty-heart.jpg') }}")
-		} else {
-			event.currentTarget.firstElementChild.setAttribute('src', "{{ asset('build/images/full-heart.jpg') }}")
-		}
-	}
-</script>
+btnToFavorites.forEach(element => {
+element.addEventListener('click', addToFavoritesWilfers);
+});
+
+function addToFavoritesWilfers(event) {
+event.preventDefault();
+fetch(this.getAttribute('href'))
+
+if (event.currentTarget.firstElementChild.getAttribute('src') == "{{ asset('build/images/full-heart.jpg') }}") {
+event.currentTarget.firstElementChild.setAttribute('src', "{{ asset('build/images/empty-heart.jpg') }}")
+} else {
+event.currentTarget.firstElementChild.setAttribute('src', "{{ asset('build/images/full-heart.jpg') }}")
+}
+}
+	</script>
 {% endblock %}

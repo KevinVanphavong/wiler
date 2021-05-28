@@ -11,14 +11,19 @@
 	{{ encore_entry_link_tags('wilfers') }}
 	<style>
 		ul li {
-			margin: 1em 0;
+			margin: 5px 0px;
+			display: inline-flex;
 		}
-		ul li span:first-child {
+		ul li p {
+			margin: 0px;
+		}
+		ul li p:first-child {
 			padding: 10px 20px;
 			background: black;
 		}
-		ul li span:last-child {
+		ul li p:last-child {
 			padding: 10px 20px;
+			margin-left: 5px;
 			background: #B79A35;
 			color: whitesmoke;
 		}
@@ -68,6 +73,15 @@
 				transform: translateX(100%)
 			}
 		}
+		@media screen and (max-width: 770px){
+			ul li:last-child {
+				display: flex;
+				flex-direction: column;
+			}
+			ul li p:last-child {
+				margin-left: 0px;
+			}
+		}
 	</style>
 {% endblock %}
 
@@ -99,28 +113,28 @@
 		<div class="d-flex flex-lg-row flex-column justify-content-around">
 			<ul class="list-unstyled d-flex flex-column justify-content-center align-items-lg-start align-items-center mt-lg-0 mt-2">
 				<li class="h4">
-					<span class="text-primary">Prénom</span>
+					<p class="text-primary">Prénom</p>
 
-					<span>{{ wilfer.firstname }}</span>
+					<p>{{ wilfer.firstname }}</p>
 				</li>
 				<li class="h4">
-					<span class="text-primary">Nom</span>
+					<p class="text-primary">Nom</p>
 
-					<span>{{ wilfer.lastname }}</span>
+					<p>{{ wilfer.lastname }}</p>
 				</li>
 				<li class="h4">
-					<span class="text-primary">Né le</span>
+					<p class="text-primary">Né le</p>
 
-					<span>{{ wilfer.birthAt | date('d/m/Y') }}</span>
+					<p>{{ wilfer.birthAt | date('d/m/Y') }}</p>
 				</li>
 				<li class="h4">
-					<span class="text-primary">Age</span>
+					<p class="text-primary">Age</p>
 
-					<span>{{ wilferAge }}ans</span>
+					<p>{{ wilferAge }}ans</p>
 				</li>
 				<li class="h4">
-					<span class="text-primary">Description</span>
-					<span>"{{ wilfer.description }}"</li>
+					<p class="text-primary">Description</p>
+					<p>"{{ wilfer.description }}"</span>
 				</li>
 			</ul>
 			<div class="d-flex justify-content-center my-lg-2 my-4 block-wilfer-img">
